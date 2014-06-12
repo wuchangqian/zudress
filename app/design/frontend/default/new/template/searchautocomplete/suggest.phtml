@@ -1,0 +1,36 @@
+<?php
+$results=$this->getSuggestProducts();
+$suggests=Mage::helper('catalogsearch')->getSuggestCollection();
+?>
+<ul class="ajaxsearch" ><li style="display:none"></li>
+<?php
+if($this->enabledSuggest())
+foreach($suggests as $_suggest)
+{
+  echo "<li class=\"suggest\" >{$_suggest->getQueryText()} <span class=\"amount\">{$_suggest->getNumResults()}</span></li>";
+}
+
+if($results->count()&&$this->enabledPreview())
+  foreach($results as $pro)
+  {
+    //$pro=Mage::getModel('catalog/product')->load($pro->getId());
+    echo "<li class=\"preview\" ><a href=\"{$pro->getProductUrl()}\">";
+    if($this->isShowImage())
+    {
+    echo "<img src=\"{$this->helper('catalog/image')->init($pro, 'small_image')->resize($this->getImageWidth(),$this->getImageHeight())}\"  />";
+    }
+    if($this->isShowName()) echo "{$pro->getName()} ";
+
+ 
+    if($this->isShowDescription())
+    {
+        $description=substr($pro->getDescription(),0,$this->getNumDescriptionChar());
+        $description=strip_tags(substr($description,0,strrpos($description,' ')));
+        echo "<div class=\"description\">$description...</div>";
+    }
+    echo "</a></li>";
+  }
+
+?>
+</ul>
+

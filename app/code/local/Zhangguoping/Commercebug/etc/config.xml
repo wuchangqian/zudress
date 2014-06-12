@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <adminhtml>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <commercebug>
+                                            <title>Configuration for Advanced Debugger</title>
+                                        </commercebug>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+
+
+	<modules>
+		<Zhangguoping_Commercebug>
+			<version>2.0.0</version>
+            <codePool>local</codePool>
+            <active>true</active>
+		</Zhangguoping_Commercebug>
+	</modules>
+
+    <frontend>
+        <routers>
+            <commercebug>
+                <use>standard</use>
+                <args>
+                    <module>Zhangguoping_Commercebug</module>
+                    <frontName>commercebug</frontName>
+                </args>
+            </commercebug>
+        </routers>  
+    </frontend>
+	
+	<global>  
+		<resources>
+			<commercebug_setup>
+				<setup>
+					<module>Zhangguoping_Commercebug</module>
+					<class>Zhangguoping_Commercebug_Model_Resource_Mysql4_Setup</class>
+				</setup>
+				<connection>
+					<use>core_setup</use>
+				</connection>
+			</commercebug_setup>
+    
+			<commercebug_write>
+				<connection>
+					<use>core_write</use>
+				</connection>
+			</commercebug_write>
+			<commercebug_read>
+				<connection>
+					<use>core_read</use>
+				</connection>
+			</commercebug_read>      
+		</resources> 
+    
+		<blocks>
+			<commercebug>
+				<class>Zhangguoping_Commercebug_Block</class>
+			</commercebug>
+		</blocks>
+		<models>
+			<commercebug>
+				<class>Zhangguoping_Commercebug_Model</class>
+				<resourceModel>commercebug_mysql4</resourceModel>
+			</commercebug>
+			
+			<commercebug_mysql4>
+				<class>Zhangguoping_Commercebug_Model_Mysql4</class>
+				<entities>
+					<snapshot>
+						<table>commercebug_snapshots</table>
+					</snapshot>
+					<snapshot_name>
+						<table>commercebug_snapshot_names</table>
+					</snapshot_name>					
+				</entities>  				
+			</commercebug_mysql4>
+			<core>
+				<rewrite>
+					<layout_update>Zhangguoping_Commercebug_Model_Layout_Update</layout_update>
+				</rewrite>
+			</core>			
+		</models>
+		
+		<helpers>
+			<commercebug>
+				<class>Zhangguoping_Commercebug_Helper</class>
+			</commercebug>
+		</helpers>
+		
+		<events>						
+			<core_block_abstract_to_html_before>
+				<observers>
+					<commercebug_for_graph>
+						<type>singleton</type>
+						<!-- <class>commercebug/observer_dot</class> -->
+						<class>Zhangguoping_Commercebug_Model_Observer_Dot</class>
+						<method>before</method>					
+					</commercebug_for_graph>
+				</observers>
+			</core_block_abstract_to_html_before>
+			
+			<core_block_abstract_to_html_after>
+				<observers>
+					<for_graph>
+						<type>singleton</type>
+						<!-- <class>commercebug/observer_dot</class> -->
+						<class>Zhangguoping_Commercebug_Model_Observer_Dot</class>
+						<method>after</method>					
+					</for_graph>
+				</observers>
+			</core_block_abstract_to_html_after>
+			
+			<controller_action_predispatch>
+				<observers>
+					<commercebug_collect_controller>
+						<type>singleton</type>
+						<!-- <class>commercebug/collectorcontroller</class> -->
+						<class>Zhangguoping_Commercebug_Model_Collectorcontroller</class>
+						<method>collectInformation</method>
+					</commercebug_collect_controller>				
+					
+					<commercebug_collect_systeminfo>
+						<type>singleton</type>
+						<!-- <class>commercebug/collectorsysteminfo</class> -->
+						<class>Zhangguoping_Commercebug_Model_Collectorsysteminfo</class>
+						<method>collectInformation</method>
+					</commercebug_collect_systeminfo>							
+				</observers>
+			</controller_action_predispatch>
+			
+			<core_block_abstract_to_html_before>
+				<observers>
+					<commercebug_collect_blocksandlayout>
+						<type>singleton</type>
+						<!-- <class>commercebug/collectorblocksandlayout</class> -->
+						<class>Zhangguoping_Commercebug_Model_Collectorblocksandlayout</class>
+						<method>collectInformation</method>					
+					</commercebug_collect_blocksandlayout>
+				</observers>						
+			</core_block_abstract_to_html_before>
+			
+			<model_load_after>
+				<observers>
+					<commercebug_collect_models>
+						<type>singleton</type>
+						<class>Zhangguoping_Commercebug_Model_Collectormodels</class>
+						<!-- <class>commercebug/collectormodels</class> -->
+						<method>collectInformation</method>						
+					</commercebug_collect_models>
+				</observers>			
+			</model_load_after>
+			
+			<eav_collection_abstract_load_before>
+				<observers>
+					<commercebug_collect_model_eavcollections>
+						<type>singleton</type>
+						<!-- <class>commercebug/collectorcollections</class> -->
+						<class>Zhangguoping_Commercebug_Model_Collectorcollections</class>
+						<method>collectInformation</method>						
+					</commercebug_collect_model_eavcollections>
+				</observers>							
+			</eav_collection_abstract_load_before>
+			<core_collection_abstract_load_after>
+				<observers>
+					<commercebug_collect_model_collections>
+						<type>singleton</type>
+						<!-- <class>commercebug/collectorcollections</class> -->
+						<class>Zhangguoping_Commercebug_Model_Collectorcollections</class>
+						<method>collectInformation</method>						
+					</commercebug_collect_model_collections>
+				</observers>				
+			</core_collection_abstract_load_after>
+			
+<!-- 
+			<resource_get_tablename>
+				<observers>
+					<unique_name>
+						<type>singleton</type>
+						<class>commercebug/collectorcollections</class>
+						<method>deriveAdditionalCollections</method>						
+					</unique_name>
+				</observers>				
+			</resource_get_tablename>
+ -->
+			
+			
+			<http_response_send_before>
+				<observers>
+					<commercebug_add_commercebug_init>
+						<type>singleton</type>
+						<!-- <class>commercebug/observer</class> -->
+						<class>Zhangguoping_Commercebug_Model_Observer</class>
+						<method>addCommercebugInit</method>
+					</commercebug_add_commercebug_init>
+				</observers>
+			</http_response_send_before>
+			
+			<controller_action_postdispatch>
+				<observers>					
+					<commercebug_model_layoutviewer_observer>
+						<type>singleton</type>						
+						<class>Zhangguoping_Commercebug_Model_Layoutviewer_Observer</class>
+						<method>checkForLayoutDisplayRequest</method>
+					</commercebug_model_layoutviewer_observer>					
+				</observers>
+			</controller_action_postdispatch>			
+			
+ 
+            <controller_action_predispatch>
+                <observers>
+                    <ascommercebug_jiggerconfig>
+                        <type>singleton</type>
+                        <class>Zhangguoping_Commercebug_Model_Observer</class>
+                        <method>jiggerConfig</method>
+                    </ascommercebug_jiggerconfig>
+                </observers>
+            </controller_action_predispatch>
+			
+		</events>	
+	</global>
+	
+	<default>
+		<commercebug>
+			<options>
+				<show_interface>1</show_interface>
+				<path_skin>{{base_skin}}/frontend/commercebug</path_skin>				
+				<check_for_updates>1</check_for_updates>
+				<update_last_check>{"date":"March 30, 2010","html":"This is where the update will go"}</update_last_check>
+				<keyboard_shortcuts>1</keyboard_shortcuts>
+				<!-- <access_class>commercebug/ison</access_class> -->
+				<access_class>Zhangguoping_Commercebug_Model_Ison</access_class>
+				<log_format_class>commercebug/formatlog_raw</log_format_class>
+				<log_format_class_custom>commercebug/formatlog_raw</log_format_class_custom>
+				<standard_classes>
+Mage_Core_Model_App
+Mage_Core_Model_App_Area
+Mage_Core_Model_Cache
+Mage_Core_Model_Config
+Mage_Core_Model_Config_Base
+Mage_Core_Model_Config_Element
+Mage_Core_Model_Config_Options
+Mage_Core_Model_Cookie
+Mage_Core_Model_Design
+Mage_Core_Model_Design_Package
+Mage_Core_Model_Layout
+Mage_Core_Model_Layout_Element
+Mage_Core_Model_Layout_Update
+Mage_Core_Model_Locale
+Mage_Core_Model_Message_Collection
+Mage_Core_Model_Session
+Mage_Core_Model_Store
+Mage_Core_Model_Store_Exception
+Mage_Core_Model_Store_Group
+Mage_Core_Model_Translate
+Mage_Core_Model_Translate_Expr
+Mage_Core_Model_Translate_Inline
+Mage_Core_Model_Url
+Mage_Core_Model_Website
+Mage_Log_Model_Visitor
+Mage_PageCache_Model_Observer
+Mage_Persistent_Model_Observer
+Mage_Persistent_Model_Observer_Session
+Mage_Persistent_Model_Session
+                </standard_classes>
+<!-- 
+				<log_format_class>Zhangguoping_Commercebug_Helper_Formatlog_Raw</log_format_class>
+				<log_format_class_custom>Zhangguoping_Commercebug_Helper_Formatlog_Raw</log_format_class_custom>
+ -->
+			</options>
+		</commercebug>
+	</default>
+	
+    <frontend>
+        <translate>
+            <modules>
+                <Zhangguoping_Commercebug>
+                    <files>
+                        <default>Zhangguoping_Commercebug.csv</default>
+                    </files>
+                </Zhangguoping_Commercebug>
+            </modules>
+        </translate>
+    </frontend>
+    
+</config>

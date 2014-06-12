@@ -1,0 +1,506 @@
+<?xml version="1.0"?>
+<config>
+    <crontab>
+        <jobs>
+            <aw_hdu_cron>
+                <schedule>
+                    <cron_expr>*/1 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>helpdeskultimate/cron::runJobs</model>
+                </run>
+            </aw_hdu_cron>
+
+        </jobs>
+    </crontab>
+
+
+    <modules>
+        <AW_Helpdeskultimate>
+            <version>2.10.1</version><platform>ee</platform>
+        </AW_Helpdeskultimate>
+    </modules>
+    <frontend>
+        <events>
+            <controller_action_layout_render_before>
+                <observers>
+                    <hdu_lrb_observer>
+                        <type>singleton</type>
+                        <class>helpdeskultimate/observer</class>
+                        <method>layoutRenderBefore</method>
+                    </hdu_lrb_observer>
+                </observers>
+            </controller_action_layout_render_before>
+            <controller_action_predispatch_contacts_contacts_post>
+                <observers>
+                    <hdu_cf_observer>
+                        <type>singleton</type>
+                        <class>helpdeskultimate/observer</class>
+                        <method>contactFormBotProtect</method>
+                    </hdu_cf_observer>
+                </observers>
+            </controller_action_predispatch_contacts_contacts_post>
+            <controller_action_predispatch_contacts_index_post>
+                <observers>
+                    <hdu_cf_observer>
+                        <type>singleton</type>
+                        <class>helpdeskultimate/observer</class>
+                        <method>contactFormBotProtect</method>
+                    </hdu_cf_observer>
+                </observers>
+            </controller_action_predispatch_contacts_index_post>
+            <controller_action_predispatch_productquestions_index_post>
+                <observers>
+                    <hdu_pq_observer>
+                        <type>singleton</type>
+                        <class>helpdeskultimate/observer</class>
+                        <method>PQFormBotProtect</method>
+                    </hdu_pq_observer>
+                </observers>
+            </controller_action_predispatch_productquestions_index_post>
+            <!--controller_action_predispatch_contacts_index_post>
+                                <observers>
+                                        <hdu_cf_observer>
+                                                <type>singleton</type>
+                                                <class>helpdeskultimate/observer</class>
+                                                <method>contactFormBotProtect</method>
+                                        </hdu_cf_observer>
+                                </observers>
+                        </controller_action_predispatch_contacts_index_post-->
+        </events>
+        <secure_url>
+            <helpdeskultimate>/helpdeskultimate/</helpdeskultimate>
+        </secure_url>
+        <routers>
+            <helpdeskultimate>
+                <use>standard</use>
+                <args>
+                    <module>AW_Helpdeskultimate</module>
+                    <frontName>helpdeskultimate</frontName>
+                </args>
+            </helpdeskultimate>
+        </routers>
+        <layout>
+            <updates>
+                <helpdeskultimate module="AW_Helpdeskultimate">
+                    <file>helpdeskultimate.xml</file>
+                </helpdeskultimate>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <AW_Helpdeskultimate>
+                    <files>
+                        <default>AW_Helpdeskultimate.csv</default>
+                    </files>
+                </AW_Helpdeskultimate>
+            </modules>
+        </translate>
+    </frontend>
+    <admin>
+
+        <routers>
+            <helpdeskultimate_admin>
+                <use>admin</use>
+                <args>
+                    <module>AW_Helpdeskultimate</module>
+                    <frontName>helpdeskultimate_admin</frontName>
+                </args>
+            </helpdeskultimate_admin>
+        </routers>
+
+    </admin>
+    <adminhtml>
+        <events>
+            <controller_action_predispatch_adminhtml_sales_order_addComment>
+                <observers>
+                    <hdu_order_observer>
+                        <type>singleton</type>
+                        <class>helpdeskultimate/observer</class>
+                        <method>createFromOrder</method>
+                    </hdu_order_observer>
+                </observers>
+            </controller_action_predispatch_adminhtml_sales_order_addComment>
+            <customer_delete_before>
+                <observers>
+                    <hdu_customer_observer>
+                        <type>singleton</type>
+                        <class>helpdeskultimate/observer</class>
+                        <method>unlinkCustomerTickets</method>
+                    </hdu_customer_observer>
+                </observers>
+            </customer_delete_before>
+            <admin_permissions_role_prepare_save>
+                <observers>
+                    <hdu_admin_permissions_role_prepare_save>
+                        <type>singleton</type>
+                        <class>helpdeskultimate/observer</class>
+                        <method>adminPermissionsRolePrepareSave</method>
+                    </hdu_admin_permissions_role_prepare_save>
+                </observers>
+            </admin_permissions_role_prepare_save>
+            <admin_roles_save_after>
+                <observers>
+                    <hdu_admin_roles_save_after>
+                        <type>singleton</type>
+                        <class>helpdeskultimate/observer</class>
+                        <method>adminRolesSaveAfter</method>
+                    </hdu_admin_roles_save_after>
+                </observers>
+            </admin_roles_save_after>
+            <admin_roles_delete_after>
+                <observers>
+                    <hdu_admin_roles_delete_after>
+                        <type>singleton</type>
+                        <class>helpdeskultimate/observer</class>
+                        <method>adminRolesDeleteAfter</method>
+                    </hdu_admin_roles_delete_after>
+                </observers>
+            </admin_roles_delete_after>
+        </events>
+        <menu>
+            <helpdeskultimate module="helpdeskultimate">
+                <depends>
+                    <module>AW_Helpdeskultimate</module>
+                </depends>
+                <title>Help Desk</title>
+                <sort_order>71</sort_order>
+
+                <children>
+                    <index translate="title" module="helpdeskultimate">
+                        <title>View tickets</title>
+                        <action>helpdeskultimate_admin/index</action>
+                        <sort_order>10</sort_order>
+                    </index>
+                    <departments translate="title" module="helpdeskultimate">
+                        <title>Manage departments</title>
+                        <action>helpdeskultimate_admin/departments</action>
+                        <sort_order>20</sort_order>
+                    </departments>
+                    <departments_stats translate="title" module="helpdeskultimate">
+                        <title>Departments statistics</title>
+                        <action>helpdeskultimate_admin/departments/stats</action>
+                        <sort_order>30</sort_order>
+                    </departments_stats>
+                    <departments_templates translate="title" module="helpdeskultimate">
+                        <title>Quick responses</title>
+                        <action>helpdeskultimate_admin/templates</action>
+                        <sort_order>40</sort_order>
+                    </departments_templates>
+                    <gateways translate="title" module="helpdeskultimate">
+                        <title>Manage email gateways</title>
+                        <action>helpdeskultimate_admin/gateways</action>
+                        <sort_order>50</sort_order>
+                    </gateways>
+                    <rejecting translate="title" module="helpdeskultimate">
+                        <title>Email Rejecting</title>
+                        <sort_order>60</sort_order>
+                        <children>
+                            <rejectedemails translate="title" module="helpdeskultimate">
+                                <title>Rejected Emails</title>
+                                <action>helpdeskultimate_admin/rejectingemails/rejectedlist</action>
+                                <sort_order>10</sort_order>
+                            </rejectedemails>
+                            <managepatterns translate="title" module="helpdeskultimate">
+                                <title>Manage Patterns</title>
+                                <action>helpdeskultimate_admin/rejectingemails/patternslist</action>
+                                <sort_order>20</sort_order>
+                            </managepatterns>
+                        </children>
+                    </rejecting>
+                    <settings translate="title" module="helpdeskultimate">
+                        <title>Settings</title>
+                        <action>adminhtml/system_config/edit/section/helpdeskultimate</action>
+                        <sort_order>70</sort_order>
+                    </settings>
+                </children>
+            </helpdeskultimate>
+        </menu>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <helpdeskultimate>
+                            <title>Helpdesk Ultimate Module</title>
+                            <sort_order>10</sort_order>
+                            <children>
+                                <index>
+                                    <title>Tickets</title>
+                                </index>
+                                <departments>
+                                    <title>Manage departments</title>
+                                </departments>
+                                <departments_stats>
+                                    <title>Departments statistics</title>
+                                </departments_stats>
+                                <departments_templates>
+                                    <title>Quick responses</title>
+                                </departments_templates>
+                                <gateways>
+                                    <title>Manage gateways</title>
+                                </gateways>
+                                <rejecting>
+                                    <title>Email Rejecting</title>
+                                    <children>
+                                        <rejectedemails>
+                                            <title>Rejected Emails</title>
+                                        </rejectedemails>
+                                        <managepatterns>
+                                            <title>Manage Patterns</title>
+                                        </managepatterns>
+                                    </children>
+                                </rejecting>
+                                <settings>
+                                    <title>Settings</title>
+                                </settings>
+                            </children>
+                        </helpdeskultimate>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <helpdeskultimate>
+                                            <title>aheadWorks - Help Desk Section</title>
+                                        </helpdeskultimate>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <layout>
+            <updates>
+                <helpdeskultimate>
+                    <file>helpdeskultimate.xml</file>
+                </helpdeskultimate>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <AW_Helpdeskultimate>
+                    <files>
+                        <default>AW_Helpdeskultimate.csv</default>
+                    </files>
+                </AW_Helpdeskultimate>
+            </modules>
+        </translate>
+        <global_search>
+            <hdu_tickets>
+                <class>helpdeskultimate/search_helpdeskultimate</class>
+            </hdu_tickets>
+        </global_search>
+        <enterprise>
+            <admingws>
+                <collection_load_before>
+                    <helpdeskultimate__ticket_collection>addStoreFilter</helpdeskultimate__ticket_collection>
+                </collection_load_before>
+            </admingws>
+        </enterprise>
+    </adminhtml>
+    <global>
+
+        <rewrite>
+
+
+            <aw_hdu_globalsearch>
+                <from><![CDATA[#^/helpdeskultimate_admin/index/globalSearch/#]]></from>
+                <to>/admin/index/globalSearch/</to>
+            </aw_hdu_globalsearch>
+
+            <aw_helpdeskultimate_templates>
+                <from><![CDATA[#^/helpdeskultimate_admin/departments/templates/(.*)#]]></from>
+                <to>/helpdeskultimate_admin/templates/$1</to>
+            </aw_helpdeskultimate_templates>
+        </rewrite>
+
+        <models>
+            <helpdeskultimate>
+                <class>AW_Helpdeskultimate_Model</class>
+                <resourceModel>helpdeskultimate_mysql4</resourceModel>
+            </helpdeskultimate>
+            <helpdeskultimate_mysql4>
+                <class>AW_Helpdeskultimate_Model_Mysql4</class>
+                <entities>
+                    <attachments>
+                        <table>aw_hdu_attachments</table>
+                    </attachments>
+                    <department>
+                        <table>aw_hdu_department</table>
+                    </department>
+                    <gateway>
+                        <table>aw_hdu_gateway</table>
+                    </gateway>
+                    <message>
+                        <table>aw_hdu_message</table>
+                    </message>
+                    <rpattern>
+                        <table>aw_hdu_rpattern</table>
+                    </rpattern>
+                    <popmessage>
+                        <table>aw_hdu_mailbox</table>
+                    </popmessage>
+                    <proto>
+                        <table>aw_hdu_proto</table>
+                    </proto>
+                    <status>
+                        <table>aw_hdu_status</table>
+                    </status>
+                    <template>
+                        <table>aw_hdu_templates</table>
+                    </template>
+                    <ticket>
+                        <table>aw_hdu_ticket</table>
+                    </ticket>
+                    <ticket_flat>
+                        <table>aw_hdu_ticket_flat</table>
+                    </ticket_flat>
+                    <department_permissions>
+                        <table>aw_hdu_department_permissions</table>
+                    </department_permissions>
+                </entities>
+            </helpdeskultimate_mysql4>
+        </models>
+        <resources>
+            <helpdeskultimate_setup>
+                <setup>
+                    <module>AW_Helpdeskultimate</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </helpdeskultimate_setup>
+            <helpdeskultimate_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </helpdeskultimate_write>
+            <helpdeskultimate_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </helpdeskultimate_read>
+        </resources>
+        <blocks>
+            <helpdeskultimate>
+                <class>AW_Helpdeskultimate_Block</class>
+            </helpdeskultimate>
+			<awcore>
+				<rewrite>
+					<adminhtml_log_grid>AW_Helpdeskultimate_Block_Core_Adminhtml_Log_Grid</adminhtml_log_grid>
+				</rewrite>
+			</awcore>
+        </blocks>
+        <helpers>
+            <helpdeskultimate>
+                <class>AW_Helpdeskultimate_Helper</class>
+            </helpdeskultimate>
+        </helpers>
+        <template>
+            <email>
+                <helpdeskultimate_to_admin_new_email translate="label" module="helpdeskultimate">
+                    <label>AW Help Desk Ultimate Admin New Ticket</label>
+                    <file>helpdeskultimate/new_to_admin.html</file>
+                    <type>html</type>
+                </helpdeskultimate_to_admin_new_email>
+                <helpdeskultimate_to_admin_reply_email translate="label" module="helpdeskultimate">
+                    <label>AW Help Desk Ultimate Admin Ticket Reply</label>
+                    <file>helpdeskultimate/reply_to_admin.html</file>
+                    <type>html</type>
+                </helpdeskultimate_to_admin_reply_email>
+
+                <helpdeskultimate_to_customer_new_email translate="label" module="helpdeskultimate">
+                    <label>AW Help Desk Ultimate Customer New ticket</label>
+                    <file>helpdeskultimate/new_to_customer.html</file>
+                    <type>html</type>
+                </helpdeskultimate_to_customer_new_email>
+
+                <helpdeskultimate_new_from_admin_to_customer translate="label" module="helpdeskultimate">
+                    <label>AW Help Desk Ultimate Customer New ticket(initialized by admin)</label>
+                    <file>helpdeskultimate/new_from_admin_to_customer.html</file>
+                    <type>html</type>
+                </helpdeskultimate_new_from_admin_to_customer>
+
+
+                <helpdeskultimate_to_customer_reply_email translate="label" module="helpdeskultimate">
+                    <label>AW Help Desk Ultimate Customer Ticket Reply</label>
+                    <file>helpdeskultimate/reply_to_customer.html</file>
+                    <type>html</type>
+                </helpdeskultimate_to_customer_reply_email>
+                
+                <helpdeskultimate_to_admin_reassign_email translate="label" module="helpdeskultimate">
+                    <label>AW Help Desk Ultimate Ticket Reassignation</label>
+                    <file>helpdeskultimate/to_admin_reassign_email.html</file>
+                    <type>html</type>
+                </helpdeskultimate_to_admin_reassign_email>
+                 <helpdeskultimate_to_customer_reassign_email translate="label" module="helpdeskultimate">
+                    <label>AW Help Desk Ultimate Ticket Reassignation For Customer</label>
+                    <file>helpdeskultimate/to_customer_reassign_email.html</file>
+                    <type>html</type>
+                </helpdeskultimate_to_customer_reassign_email>
+
+            </email>
+        </template>
+
+    </global>
+
+    <default>
+        <helpdeskultimate>
+            <imap>
+                <server>localhost</server>
+                <port>110</port>
+                <ssl>0</ssl>
+                <login></login>
+                <password></password>
+                <auto_deps>0</auto_deps>
+            </imap>
+            <antibot>
+                <cf_antibot>1</cf_antibot>
+                <pq_antibot>1</pq_antibot>
+            </antibot>
+            <generaldep>
+                <notify>1</notify>
+                <name>General support department</name>
+                <to_admin_reply_email>helpdeskultimate_to_admin_reply_email</to_admin_reply_email>
+                <to_admin_new_email>helpdeskultimate_to_admin_new_email</to_admin_new_email>
+                <to_customer_reply_email>helpdeskultimate_to_customer_reply_email</to_customer_reply_email>
+                <to_customer_new_email>helpdeskultimate_to_customer_new_email</to_customer_new_email>
+                <to_admin_reassign_email>helpdeskultimate_to_admin_reassign_email</to_admin_reassign_email>
+                <to_customer_reassign_email>helpdeskultimate_to_customer_reassign_email</to_customer_reassign_email>
+                <new_from_admin_to_customer>helpdeskultimate_new_from_admin_to_customer</new_from_admin_to_customer>
+                <contact></contact>
+                <sender>general</sender>
+            </generaldep>
+            <advanced>
+                <orders_enabled>0</orders_enabled>
+                <visible_deps>1</visible_deps>
+                <maxupload>2</maxupload>
+                <ticketexpire>5</ticketexpire>
+                <allownew>0</allownew>
+                <allowexternal>1</allowexternal>
+            </advanced>
+            <modules>
+                <cf_enabled>0</cf_enabled>
+                <show_dep_selector>1</show_dep_selector>
+                <cf_disable_email>1</cf_disable_email>
+            </modules>
+            <gridcolumns>
+                <last_customer_reply>1</last_customer_reply>
+                <last_department_reply>1</last_department_reply>
+            </gridcolumns>
+        </helpdeskultimate>
+    </default>
+
+    <phpunit>
+        <suite>
+            <modules>
+                <AW_Helpdeskultimate/>
+            </modules>
+        </suite>
+    </phpunit>
+
+</config>

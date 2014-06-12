@@ -1,0 +1,39 @@
+/**
+ * Contus Support Interactive.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file PRICE COUNTDOWN-LICENSE.txt.
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This package designed for Magento 1.4.x and 1.5.x COMMUNITY edition
+ * Contus Support does not guarantee correct work of this package
+ * on any other Magento edition except Magento 1.4.x and 1.5.x COMMUNITY edition.
+ * =================================================================
+ */
+.dailydeals_date {
+    background: url("../images/ico.gif") no-repeat scroll 0 -610px transparent;
+    padding-left: 16px;
+	font-size:11px;
+}
+#leftTime{color:#FF5A00;     font-weight: normal;}
+#leftTime  em{font-weight: normal !important;}
+.timer-view-grin {float:left;}
+.Pormotion_item3 {float:left;}
+ .timer-grid{float: left;width: 100%;padding: 3px 0 0 0;color: #000000;font-size: 18px;font-family: arial; font-weight: bold;}
+ .timer-list{float: left;width: 100%;padding: 0;color: #000000;font-size: 18px;font-family: arial; font-weight: bold;}
+ .timer-view{float: left;width: 100%;padding:2px 0 0 0px;color: #000000;font-size: 40px; font-family:arial;font-weight: bold;}
+ .timer-view .day{margin:1px 1px}
+ .timer-view .hour{margin:1px 1px}
+ .timer-view .min{margin:1px 1px}
+ .timer-view .sec{margin:1px 1px}
+ .timer-compare{float: left;width: 100%;padding: 0;color: #000000;font-size: 22px;font-family: arial; font-weight: bold;}
+ .timerspec{float: left;width: 100%;color: #1E7EC8;font-size: 13px;}
+ .timerdate{float: left;width: 100%;padding:0 0 3px 0;color: #1E7EC8;font-size: 12px;}
+ .timerdate .day{margin:1px 1px; width:20px; text-align: center;}
+ .timerdate .hour{margin:1px 1px;width:20px; text-align: center;}
+ .timerdate .min{margin:1px 1px; width:20px; text-align: center;}
+ .timerdate .sec{margin:1px 1px; width:20px; text-align: center;}

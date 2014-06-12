@@ -1,0 +1,27 @@
+Added Events Tab
+
+Added Observers Tab
+
+Rewrote table rendering engine
+
+Added additional CSS hooks to containers
+
+Added z-index to ascommercebug-tabs to handle floated layouts
+
+Fixed missing system configuration node bug that crashed EE 1.12
+
+Removed custom configuration for logging class, users should rewrite helper class: commercebug/helper_Formatlog_Allsimple
+
+Removed custom configuration for "is on" class, users should rewrite mode: commercebug/ison
+
+Added search fields to data tables
+
+Toggle Template and Block Path Hints Buttons
+
+XHTML Compatibility
+
+Removed broken update tracker
+
+Move JS files out of skin folder, in js folder
+
+Other bug and stability fixes

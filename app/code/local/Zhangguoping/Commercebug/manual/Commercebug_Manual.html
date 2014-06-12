@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+</head>
+<body>
+<h1 id="commerce-bug-manual">Commerce Bug Manual</h1>
+<p>Manual provided free of charge by Pulse Storm LLC. © 2012 all rights reserved.</p>
+<p>Support avaiable for registered customers at: http://pulsestorm.net/contact-us</p>
+<h1 id="introduction">Introduction</h1>
+<p>This manual contains an explanation of Commerce Bug's features, as well as tips for optimal use. Reading through the manual will give you a better understanding of how Commerce Bug works. You may end up learning a thing or two about Magento as well.</p>
+<h2 id="general-conventions">General Conventions</h2>
+<p>All Magento class name displayed in Commerce Bug will include a full file system path to the class definition file</p>
+<pre><code>Mage_Core_Model_Url_Rewrite
+/path/to/magento/app/code/core/Mage/Core/Model/Url/Rewrite.php</code></pre>
+<p>Template paths, however, will be listed relative to the design folder</p>
+<pre><code>//app/design is infered
+frontend/base/default/template/page/2columns-right.phtml</code></pre>
+<p>All Commerce Bug related classes/object are suppressed from the data tables.</p>
+<p>The following documentation refers specifically of functionality in Magento 1.7+, but most information should be relevant to <strong>all</strong> Magento versions.</p>
+<p>You may view an online demo of Commerce Bug at</p>
+<pre><code>http://commercebugdemo.pulsestorm.net/</code></pre>
+<p>and purchase a copy in the Pulse Storm Store</p>
+<pre><code>http://store.pulsestorm.net/</code></pre>
+<h1 id="installation">Installation</h1>
+<p>See <code>CB_README.html</code> or <code>CB_README.markdown</code> for instructions on installing Commerce Bug into your Magento system.</p>
+<h1 id="request-tab">Request Tab</h1>
+<p>The request table contains information about Magento's handling of the HTTP request.</p>
+<h3 id="controller-class-name">Controller Class Name</h3>
+<p>The name of the Magento MVC action controller class the request was ultimately routed to.</p>
+<h3 id="full-action-name">Full Action Name</h3>
+<p>The &quot;Full Action Name&quot;, as returned by the controller's <code>getFullActionName</code> method. The full action name combines the URL front/module, controller, and action names into a single string, and is used by various parts of the Magento system</p>
+<h3 id="module-name">Module Name</h3>
+<p>The &quot;front&quot; or &quot;module&quot; portion of the URL as seen by the controller object. Typically this is the first part of the URL</p>
+<pre><code>http://example.com/index.php/module/controller/action</code></pre>
+<p>but this may not be the case is the requests been re-routed or rewritten.</p>
+<h3 id="controller-name">Controller Name</h3>
+<p>The controller portion of the URL, as seen by the controller object. This is typically the second part of the URL</p>
+<pre><code>http://example.com/index.php/module/controller/action</code></pre>
+<h3 id="action-name">Action Name</h3>
+<p>The action portion of the URL, as seen by the controller object. This is typically the third part of the URL</p>
+<pre><code>http://example.com/index.php/module/controller/action</code></pre>
+<p>The action name can be used to derive the controller action method by append the word action.</p>
+<pre><code>Action Name:        view
+PHP Action Method:  viewAction</code></pre>
+<h3 id="path-info">Path Info</h3>
+<p>The un-rewritten path information for a URL. Most useful when viewing products or category pages. For example, using the sample data, the following URLs</p>
+<pre><code>http://magento1point7pointzeropoint1.dev/electronics/cell-phones.html
+http://magento1point7pointzeropoint1.dev/electronics/cell-phones/nokia-2610-phone.html</code></pre>
+<p>have a path info values of</p>
+<pre><code>catalog/category/view/id/8
+catalog/product/view/id/16/category/8</code></pre>
+<p>This lets you know the cell phone category ID is &quot;8&quot;, and the Nokia 2610 product ID is 16.</p>
+<h1 id="crud-models-tab">CRUD Models Tab</h1>
+<p>The CRUD Models tab contains a list of every loaded model object that inherits from <code>Mage_Core_Model_Abstract</code>. If a model does not inherit from this abstract class, or it fails to fire an after load event, it will not appear in this tab.</p>
+<p>CRUD is a software development acronym that stands for for <strong>c</strong>reate, <strong>r</strong>ead, <strong>u</strong>pdate and <strong>d</strong>elete. CRUD models allow developrs to automate much of the boilerplate code involved in reading and writing information to and from a database or other datastore. Although Magento doesn't explicitly label the <code>Mage_Core_Model_Abstract</code> models as CRUD models, this is the purpose they serve in the system. See the &quot;Other Classes&quot; chapter for information on Magento model objects which are <strong>not</strong> CRUD models.</p>
+<h1 id="collections-tab">Collections Tab</h1>
+<p>The Collections tab contains a list of every loaded Magento collection object that inherits from <code>Mage_Core_Model_Mysql4_Collection_Abstract</code>. If a collection does not inherit from this abstract class, or it fails to fire an after load event, it will not appear on this tab.</p>
+<p><strong>Important</strong>: Even modern version of Magento contain a few legacy collection which inherit directly from <code>Varien_Data_Collection_Db</code>. As no events are fired from this class, these collections are not captured in this tab.</p>
+<h1 id="blocks-tab">Blocks Tab</h1>
+<p>The Blocks tab contains a list of every block rendered by the layout object during a Magento page request.</p>
+<p>If the block has a template file set, the design path to this file will be included in the &quot;With Template&quot; column. Although rare, it is possible a block may have a template set, but renders via an overridden <code>_toHtml</code> method.</p>
+<p><strong>Important</strong>: If a block is not rendered by the Layout object, or is rendered in such a way as it's events do not fire, it will not appear in this list. See the &quot;Other Classes&quot; chapter for hints on finding these classes in your system.</p>
+<h1 id="layout-tab">Layout Tab</h1>
+<p>The Layout tab contains information related to Magento's custom layout rendering system.</p>
+<h3 id="graphviz-file">Graphviz File</h3>
+<p>If you're read &quot;No Frills Magento Layout&quot;, you know Magento's layout object is a nested tree of block objects. The text in the &quot;Graphviz&quot; source textarea contains a directed graph file displaying the tree relationships between blocks. You may view this file with a program such as <a href="http://www.graphviz.org/">Graphviz</a>, or any other program that renders the directed graph <code>dot</code> format.</p>
+<p><strong>Please Note:</strong> This graph relies on the Block object's event handlers. If a block is rendered via an alternative method, it may not be displayed in this graph. Use the &quot;Other Classes&quot; tab to find such block objects.</p>
+<h3 id="layout-handles">Layout Handles</h3>
+<p>Layout handles are special signals that tell Magento which blocks to render during a request. This table lists all the handles issued during a request.</p>
+<h3 id="package-layout">Package Layout</h3>
+<p>The entire, pre-handle-filtered Magneto package layout XML tree for this request.</p>
+<h3 id="page-layout">Page Layout</h3>
+<p>The final, handle-filtered Magento layout XML tree for this request.</p>
+<h3 id="view-layout-files">View Layout Files</h3>
+<p>Opens a list of Magento Layout XML files used for this request. Useful for debugging theme conflicts.</p>
+<h3 id="path-information">Path Information</h3>
+<p>A list of information related to Magento's theme system, including</p>
+<h4 id="package">Package</h4>
+<p>The design package name</p>
+<h4 id="default-theme">Default Theme</h4>
+<p>The name of the configured &quot;default&quot; theme, where Magneto looks for files before resorting to the base design package</p>
+<h4 id="custom-package">Custom Package</h4>
+<p>The value of the custom design package, set at <code>System -&gt; Design</code></p>
+<h4 id="custom-package-1">Custom Package</h4>
+<p>The value of the custom design theme, set at <code>System -&gt; Design</code></p>
+<h4 id="templates">Templates</h4>
+<p>Location of the base template folder.</p>
+<h4 id="layout">Layout</h4>
+<p>Location of the base layout folder.</p>
+<h4 id="translations">Translations</h4>
+<p>Location of the theme locale folder.</p>
+<h4 id="skin">Skin</h4>
+<p>Value of the <code>skin</code> folder currently configured.</p>
+<h1 id="other-classes">Other Classes</h1>
+<p>Both Commerce Bug's CRUD Models and Blocks tab contain objects which are configured and instantiated via standard Magento mechanisms. However, not all Magento Model and Block classes are created equal. There are many Magento model classes which contain generic business logic that's unrelated to database operations, and there's a number of block object which render via a mechanism other than the Magneto layout object.</p>
+<p>The &quot;Other Classes&quot; tab attempts to collect detect when these classes are used during a page request and display their name/file location. To help reduce the number of classes displayed on this tab, Commerce Bug will automatically surpress the display of classes listed at</p>
+<pre><code>System -&gt; Configuration -&gt; Advanced -&gt; Commerce Bug </code></pre>
+<p>By default the following classes will be suppressed from this tab</p>
+<pre><code>Mage_Core_Model_App
+Mage_Core_Model_App_Area
+Mage_Core_Model_Cache
+Mage_Core_Model_Config
+Mage_Core_Model_Config_Base
+Mage_Core_Model_Config_Element
+Mage_Core_Model_Config_Options
+Mage_Core_Model_Cookie
+Mage_Core_Model_Design
+Mage_Core_Model_Design_Package
+Mage_Core_Model_Layout
+Mage_Core_Model_Layout_Element
+Mage_Core_Model_Layout_Update
+Mage_Core_Model_Locale
+Mage_Core_Model_Message_Collection
+Mage_Core_Model_Session
+Mage_Core_Model_Store
+Mage_Core_Model_Store_Exception
+Mage_Core_Model_Store_Group
+Mage_Core_Model_Translate
+Mage_Core_Model_Translate_Expr
+Mage_Core_Model_Translate_Inline
+Mage_Core_Model_Url
+Mage_Core_Model_Website
+Mage_Log_Model_Visitor
+Mage_PageCache_Model_Observer
+Mage_Persistent_Model_Observer
+Mage_Persistent_Model_Observer_Session
+Mage_Persistent_Model_Session</code></pre>
+<p>Additionally, all Model resource classes will be suppressed from this list as well.</p>
+<h1 id="events-tab">Events Tab</h1>
+<p>The Events tab contains a list of every event fired during a Magento request.</p>
+<p>This information is derived from the Magento application object via reflection, and is therefore not a complete chronological list of every event &quot;fired&quot;, but rather includes a list of each unique event name.</p>
+<p>Additionally, the <code>area</code> column may be misleading. If an event is configured in the <code>global</code> area, Magento will add it to the <code>front</code> or <code>adminhtml</code> area automatically before firing it. This means during normal system operation an event listed under the <code>global</code> area will be duplicated under the <code>frontname</code> or <code>adminhtml</code> area.</p>
+<h1 id="observers-tab">Observers Tab</h1>
+<p>The Observers tab contains a list of each specific observer method fired during a request.As Commerce Bug itself is attached using the <code>http_response_send_before</code> event, all Observers for <code>http_response_send_before</code> may not be listed in this table.</p>
+<h3 id="event">Event</h3>
+<p>The name of the fired event this observer was listening for.</p>
+<h3 id="configured-name">Configured Name</h3>
+<p>The name of the configuration node that added this observer</p>
+<pre><code>&lt;core_block_abstract_to_html_before&gt;
+    &lt;observer&gt;
+        &lt;configured_name&gt;
+            ...
+        &lt;/configured_name&gt;
+    &lt;/observer&gt;
+&lt;/core_block_abstract_to_html_before&gt;</code></pre>
+<p>This name must be unique on a per event basis — otherwise conflicts may occur.</p>
+<h3 id="type">Type</h3>
+<p>The &quot;type&quot; of the event, if configured. If set to <code>singleton</code>, Magento will reuse that same event object instance each time the event is fired. If set to <code>model</code>, Magento will instantiate a new object each time an event is fired. If not set, Magento defaults to <code>singleton</code> behavior.</p>
+<h3 id="class">Class</h3>
+<p>The name of the configured class for an observer. This may be a full PHP class</p>
+<pre><code>Mage_Cms_Controller_Router</code></pre>
+<p>or a Magento model class alias</p>
+<pre><code>cms/router</code></pre>
+<p>To find the full file path for this class, use the Class/URI Lookup tab.</p>
+<h3 id="method">Method</h3>
+<p>The name of the called observer method.</p>
+<h1 id="classalias-lookup-tab">Class/Alias Lookup Tab</h1>
+<p>The Class Alias Lookup tab demystifies Magento class aliases, and allows you to quickly find any Model, Block, or Helper class.</p>
+<p>Magento uses class aliases (i.e. <code>cms/page</code>) in its factory methods as substitutes for full class names. Entering an alias into the form will expand it into its full Model, Resource Model, Block, and Helper name. This features takes class rewrites into account, and will display the <strong>rewritten</strong> class name. This is a quick way to determine if Magento is picking up a particular class rewrite configuration.</p>
+<p>Entering a full class name (i.e. <code>Mage_Cms_Model_Page</code>) will return its derived class alias (<code>cms/page</code>), and inform you if the class has been rewritten.</p>
+<h3 id="tips-and-tricks">Tips and Tricks</h3>
+<p>Occasionally, attempting to derive a particular class alias in a particular context will result in an unavoidable fatal PHP error. You can narrow this problem down by using the &quot;Context&quot; drop-down to return the class alias's full class name for a particular context (Model, Block, Helper)</p>
+<h1 id="system-tasks">System Tasks</h1>
+<p>The System Tasks tab contains easy access buttons for common system tasks, such as clearing the Magento cache, or toggling the value of template path hints.</p>
+<p>The System Tasks toggle <strong>do not</strong> alter information in the <code>core_config_data</code> table. Instead, toggle values are stored in Magento's cache and then loaded dynamically at runtime via an event observer. This ensures only Commerce Bug users will see the system in its altered state.</p>
+<h1 id="access-control">Access Control</h1>
+<p>When working in a team environment, it's often necessary for certain team members to see the Commerce Bug extension (developers), but for other team members (non-technical management, clients, etc.) to <strong>not</strong> see the extension.</p>
+<p>Commerce Bug itself does not ship with any &quot;access control&quot; rules. Instead, there's a single Magento model object with the class alias <code>commercebug/ison</code></p>
+<pre><code>#File: Commercebug/Model/Ison.php
+class Pulsestorm_Commercebug_Model_Ison extends Varien_Object
+implements Pulsestorm_Commercebug_Model_Interface_Ison
+{
+    //...
+    public function isOn()
+    {
+        return true;
+    }
+}</code></pre>
+<p>Before displaying its interface, Commerce Bug will call this object's <code>isOn</code> method. If it returns <code>true</code>, Commerce Bug will display. If not, Commerce Bug's UI will be suppressed.</p>
+<p>By creating a standard Magento class rewrite for this method, you may implement your own access control rules (IP based, etc.)</p>
+<p><strong>Please Note</strong>: Even with this feature, we do <strong>not support</strong> running Commerce Bug in a production environment. Like all debugging tools, Commerce Bug is <strong>designed</strong> to display sensitive system information in a public way that may not be appropriate on a production server.</p>
+<h1 id="other-tips">Other Tips</h1>
+<h3 id="search-fields">Search Fields</h3>
+<p>Many tables in Commerce Bug have a search field at the top. You may use this field to search for text in a row. For example, in the &quot;Other Classes&quot; tab, you could find all the non-layout Block classes by searching for</p>
+<pre><code>_Block_</code></pre>
+<p>You may also search for rows with <strong>do not</strong> contain a particular bit of text by using a minus (<code>-</code>) operator. For example, to search for all the classes without <code>Mage_</code> in their name, enter</p>
+<pre><code>-Mage_</code></pre>
+<h3 id="system-configuration">System Configuration</h3>
+<p>Commerce Bug 2 contains a new, streamlined configuration section with the following fields</p>
+<h4 id="show-debug-menu">Show Debug Menu</h4>
+<p>This settling allows you to turn the Commerce Bug debug menu on and off.</p>
+<p><strong>Please Note</strong>: Even with this feature, we do <strong>not support</strong> running Commerce Bug in a production environment. Like all debugging tools, Commerce Bug is <strong>designed</strong> to display sensitive system information in a public way that may not be appropriate on a production server.</p>
+<h4 id="log-collected-data">Log Collected Data</h4>
+<p>When this setting is set to &quot;On&quot;, Commerce Bug will log its data to to Magento's <code>system.log</code> file.</p>
+<p>If custom logging behavior is needed, developers may implement this with with a standard Magento class rewrite. Logging is handled by the helper class <code>commercebug/log</code>. In a default instalation, that's the helper file at</p>
+<pre><code>#File: Commercebug/Helper/Log.php
+class Pulsestorm_Commercebug_Helper_Log
+{
+    //...
+    public function log($message, $level=null, $file = &#39;&#39;)
+    {
+        if(Mage::getStoreConfig(&#39;commercebug/options/should_log&#39;))
+        {
+            Mage::Log($message, $level, $file);
+        }
+    }
+
+    public function format($thing)
+    {
+        $helper = Mage::helper(&#39;commercebug/formatlog_allsimple&#39;);
+        if($helper)
+        {
+            return $helper-&gt;format($thing);
+        }
+        Mage::Log(sprintf(&#39;Could not instantiate helper class: %s&#39;,$alias));
+    }
+    //...
+}</code></pre>
+<p>All Commerce Bug logging request are sent through the <code>log</code> method. The messages themselves are formatted with the <code>format</code> method. Logging may also be customized with rewrites to the <code>commercebug/formatlog_allsimple</code> method.</p>
+<h4 id="use-keyboard-tab-navigation">Use Keyboard Tab Navigation</h4>
+<p>This field allows you to turn off the <code>h</code> and <code>l</code> keyboard shortcuts for navigating through Commerce Bug tabs.</p>
+
+</body>
+</html>
+

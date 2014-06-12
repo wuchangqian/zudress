@@ -1,0 +1,13 @@
+Excluding Commercebug Blocks from output
+
+fixme Template paths now start from app/design/
+
+Commerce Bug no longer dies when "flat mode" is enabled for products or catalog
+
+Event container nodes renamed to avoid conflicts with other extensions
+
+Pre-emptive loading of store objects will no longer crash the system
+
+Added Design Package/Theme information to Layout Tab
+
+Other tweaks, enhancements and code cleanup

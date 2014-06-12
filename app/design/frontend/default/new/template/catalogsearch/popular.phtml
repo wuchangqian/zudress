@@ -1,0 +1,27 @@
+<div class="search_term">
+<?php if( sizeof($this->getTerms()) > 0 ): ?>
+    <div id="popSearchTerms">
+    <ul class="term-list">
+        <li class="icon-term"><?php echo $this->__('Popular Searches=> ') ?></li>
+	<?php 
+        $i = 0;
+        $getRatioSort = $this->getTerms();
+        foreach ($getRatioSort  as $key => $row) {
+		$volume[$key]  = $row->getRatio();
+        }
+
+	array_multisort($volume, SORT_DESC,  $getRatioSort);
+        foreach ($getRatioSort as $_term):
+        if ($i>7) {break;}
+        ?>
+           <li><a href="<?php echo $this->getSearchUrl($_term) ?>"><?php echo $this->htmlEscape($_term->getName()) ?></a></li>
+        <?php $i++; endforeach; ?>
+        <li><a href="<?php echo $this->getUrl('catalogsearch/term/popular') ?>"><?php echo $this->__('More »') ?></a></li>
+    </ul>
+    </div>
+<?php else: ?>
+    <div class="no-item">
+        <?php echo $this->__('There are no search terms available.'); ?>
+    </div>
+<?php endif ?>
+</div> 

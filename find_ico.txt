@@ -1,0 +1,11 @@
+./downloader/favicon.ico
+./errors/default/images/favicon.ico
+./errors/enterprise/images/favicon.ico
+./favicon.ico
+./skin/adminhtml/default/default/favicon.ico
+./skin/frontend/base/default/favicon.ico
+./skin/frontend/default/new/favicon.ico
+./skin/frontend/enterprise/default/favicon.ico
+./skin/frontend/enterprise/iphone/favicon.ico
+./skin/frontend/enterprise/mobile/favicon.ico
+./skin/install/default/default/favicon.ico

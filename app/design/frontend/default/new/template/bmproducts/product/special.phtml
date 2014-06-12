@@ -1,0 +1,93 @@
+<style>
+
+</style>
+<?php if (($_products = $this->getProductCollection()) && $_collectionSize = $_products->getSize()): ?>
+<div class="special-box home-box wcq">
+<script type="text/javascript">
+//<![CDATA[
+// Credits: Robert Penners easing equations (http://www.robertpenner.com/easing/).
+jQuery.easing['BounceEaseOut'] = function(p, t, b, c, d) {
+	if ((t/=d) < (1/2.75)) {
+		return c*(7.5625*t*t) + b;
+	} else if (t < (2/2.75)) {
+		return c*(7.5625*(t-=(1.5/2.75))*t + .75) + b;
+	} else if (t < (2.5/2.75)) {
+		return c*(7.5625*(t-=(2.25/2.75))*t + .9375) + b;
+	} else {
+		return c*(7.5625*(t-=(2.625/2.75))*t + .984375) + b;
+	}
+};
+
+jQuery(document).ready(function() {
+    jQuery('#mycarousel').jcarousel({
+        easing: 'BounceEaseOut',scroll:1, animation: 1000
+    });
+});
+//]]>
+</script>
+<?php
+$count = 1;
+/* Admin Controllers for timer are declared here */
+ $timer_active =1;
+$formday=date("y-m-d h:i:s");
+?>
+
+  <?php $i=0; foreach ($_products->getItems() as $_product): ?>
+	
+	     <?php if($i==0){?>
+		     <div class="head">
+				<span  class="dailydeals-span">
+				<?php echo $this->__('Deals') ?>
+				</span>
+		   <?php  if(strtotime($formday)<strtotime($_product->getSpecialFromDate())){ $toDate = $_product->getSpecialFromDate();}else{ $toDate = $_product->getSpecialTODate();}?>
+		   <div class="Pormotion_item<?php if(strtotime($formday)<strtotime($_product->getSpecialFromDate())){echo 2;}else{echo 3;}?>">
+		        <!--Condition for Timer Controllers goes here-->
+				<?php if($timer_active == 1) :?>
+				<?php if($_product->getPrice() > $_product->getSpecialPrice()) : ?>
+				<?php if($_product->getSpecialPrice()!= 0 || $_product->getSpecialPrice()!= "" ) :?>
+				<div  id="countbox_<?php echo $count; ?>" class="timer-view-grin   <?php if(strtotime($formday)<strtotime($_product->getSpecialFromDate())){echo "timer-view-green";}?>"></div>
+				<?php endif;endif;endif;?>
+			</div>
+				<?php if($_product->getPrice() > $_product->getSpecialPrice()) : ?>
+				<?php if($_product->getSpecialPrice()!= 0 || $_product->getSpecialPrice()!= "" ) :?>
+						<script type="text/javascript">
+							var dthen<?php echo $count; ?> = new Date("<?php echo Date("m/d/y", strtotime($toDate)).' 11:59:00 PM'; ?>");
+							start = "<?php echo Date("m/d/y h:i:s A", strtotime(Mage_Core_Model_Locale::date(null, null, "en_US", true))); ?>";
+							start_date = Date.parse(start);
+							var dnow<?php echo $count; ?> = new Date(start_date);
+							if(CountStepper>0)
+								ddiff= new Date((dnow<?php echo $count; ?>)-(dthen<?php echo $count; ?>));
+							else
+								ddiff = new Date((dthen<?php echo $count; ?>)-(dnow<?php echo $count; ?>));
+							gsecs<?php echo $count; ?> = Math.floor(ddiff.valueOf()/1000);
+
+							var iid<?php echo $count; ?> = "countbox_<?php echo $count; ?>";
+							CountBack(gsecs<?php echo $count; ?>,"countbox_"+j, j);
+							j++;
+						</script>
+				<?php $count = $count + 1; ?>
+				<?php endif;endif; ?>
+			      </div>
+                  <ul id="mycarousel" class="jcarousel-skin-tango">
+	      <?php }?>
+        <li>
+		   <div class="home-product-img">
+			   <a width="155" height="120" href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_product->getName()) ?>)">
+				<img class="product-image" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(155,120) ?>"  alt="<?php echo $this->htmlEscape($_product->getName()) ?>" />
+			   </a>
+            </div>
+			<div class="other-info">
+  
+		      <h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_product->getName()) ?>)"><?php echo $this->htmlEscape($_product->getName()) ?></a></h2>
+		      <?php echo $this->getPriceHtml($_product, true, $this->getPriceSuffix()) ?>
+			  
+            </div>
+			<a class="buy-it buyLinks" href="<?php echo $this->getAddToCartUrl($_product) ?>">Buy it</a>
+	   </li>
+	   
+    <?php $i++; endforeach; ?>
+
+    </ul>
+    <div class="dealsoff"><div class="clear"></div></div>
+</div>
+<?php endif; ?>

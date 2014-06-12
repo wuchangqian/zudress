@@ -1,0 +1,69 @@
+<config>
+	<tabs>
+<!-- 
+		<ascommercebug_welcome>
+			<title>Welcome</title>
+			<block>commercebug/tab_welcome</block>
+		</ascommercebug_welcome>
+ -->
+		
+		<ascommercebug_controllers>
+			<title>Request</title>		
+			<block>commercebug/tab_controllers</block>
+		</ascommercebug_controllers>
+		
+		<ascommercebug_models>
+			<title>CRUD Models</title>		
+			<block>commercebug/tab_models</block>
+		</ascommercebug_models>
+
+		<ascommercebug_collections>
+			<title>Collections</title>		
+			<block>commercebug/tab_collections</block>
+		</ascommercebug_collections>
+		
+		<ascommercebug_blocks>
+			<title>Blocks</title>		
+			<block>commercebug/tab_blocks</block>
+		</ascommercebug_blocks>
+		
+		<ascommercebug_layout>
+			<title>Layout</title>		
+			<block>commercebug/tab_layout</block>
+		</ascommercebug_layout>
+
+		<ascommercebug_objects_other>
+			<title>Other Classes</title>		
+			<block>commercebug/tab_other</block>
+		</ascommercebug_objects_other>
+
+		
+		<ascommercebug_events>
+			<title>Events</title>		
+			<block>commercebug/tab_events</block>
+		</ascommercebug_events>
+
+		<ascommercebug_observers>
+			<title>Observers</title>		
+			<block>commercebug/tab_observers</block>
+		</ascommercebug_observers>
+
+		
+		<ascommercebug_lookup>
+			<title>Alias Lookup</title>		
+			<block>commercebug/tab_lookup</block>		
+		</ascommercebug_lookup>
+
+		<ascommercebug_systemtasks>
+			<title>System Tasks</title>		
+			<block>commercebug/tab_systemtasks</block>
+		</ascommercebug_systemtasks>
+		
+<!-- 
+		<ascommercebug_test>
+			<title>Test Tab</title>		
+			<block>commercebug/tab_test</block>
+		</ascommercebug_test>
+ -->		
+	</tabs>
+</config>

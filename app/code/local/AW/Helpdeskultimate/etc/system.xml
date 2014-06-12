@@ -1,0 +1,469 @@
+<?xml version="1.0"?>
+
+<config>
+    <sections>
+        <helpdeskultimate translate="label" module="helpdeskultimate">
+            <label>Help Desk</label>
+            <tab>awall</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <advanced translate="label">
+                    <label>Advanced Options</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>60</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <visible_deps translate="label">
+                            <label>Show departments selector on frontend</label>
+                            <comment>If No is selected, customers won't be able to choose the department when submitting a ticket. In that case, ticket will be sent to primary department (if specified).</comment>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </visible_deps>
+                        <visible_priority translate="label">
+                            <label>Show priority selector on frontend</label>
+                            <!--comment>If no all tickets will be initially assigned to General or primary (if applicable) department</comment-->
+                            <frontend_type>select</frontend_type>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </visible_priority>
+                        <managefiles translate="label">
+                            <label>Handle file uploads</label>
+                            <comment></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </managefiles>
+                        <maxupload translate="label">
+                            <label>Max Upload File Size (Mb)</label>
+                            <comment></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>105</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </maxupload>
+                        <ticketexpire translate="label">
+                            <label>Ticket auto-expiration, days</label>
+                            <comment>Enter 0 or leave the field empty if auto-expiration is not required</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </ticketexpire>
+
+                        <allownew translate="label">
+                            <label>Create new tickets from email</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </allownew>
+                        <custom_statuses translate="label">
+                            <label>Custom ticket statuses</label>
+                            <comment>Enter comma-separated values</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>122</sort_order>
+                            <backend_model>helpdeskultimate/system_config_backend_status</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                        </custom_statuses>
+                        <ticket_from_admin_status translate="label">
+                            <label>Default admin ticket status</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>123</sort_order>
+                            <backend_model>helpdeskultimate/system_config_backend_statusbyadmin</backend_model>
+                            <show_in_default>1</show_in_default>
+                        </ticket_from_admin_status>
+                        <allowexternal>
+                            <label>Allow external view for tickets</label>
+                            <comment>Allows customers to view tickets without being logged in</comment>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>125</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </allowexternal>
+                        <orders_enabled translate="label">
+                            <label>Enable linking tickets to orders</label>
+                            <comment>Allows customers to link tickets to orders</comment>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>130</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </orders_enabled>
+                        <carbon_copy translate="label">
+                            <label>Send carbon copy to</label>
+                            <comment>If filled in, copies of the all messages from Helpdesk will be sent to this email</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>140</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </carbon_copy>
+                        <email_customer_reassign translate="label">
+                            <label>Send email to customer on department reassign</label>                          
+                            <frontend_type>select</frontend_type>
+                            <sort_order>150</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </email_customer_reassign>
+                    </fields>
+                </advanced>
+                <!--
+                <antibot translate="label">
+                    <label>Bots/Spam protection</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <cf_antibot translate="label">
+                            <label>Protect contact form</label>
+                            <comment></comment>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </cf_antibot>    
+                        <pq_antibot translate="label">
+                            <label>Protect Product Questions form</label>
+                            <comment></comment>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </pq_antibot>
+                    </fields>    
+                </antibot>
+                !-->
+
+                <modules translate="label">
+                    <label>Modules integration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>80</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <pq_enabled translate="label">
+                            <label>Product Questions</label>
+                            <frontend_type>select</frontend_type>
+                            <comment>If you don't have the Product Questions installed, you can purchase it &lt;a href='http://ecommerce.aheadworks.com/extensions/product-questions.html'&gt;here&lt;/a&gt;</comment>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <backend_model>helpdeskultimate/system_config_backend_integrationState</backend_model>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </pq_enabled>
+                        <cf_enabled translate="label">
+                            <label>Contact Form</label>
+                            <frontend_type>select</frontend_type>
+                            <comment>If Yes, a ticket would be created when sending a message through the contact form</comment>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <backend_model>helpdeskultimate/system_config_backend_integrationState</backend_model>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </cf_enabled>
+                        <show_dep_selector translate="label">
+                            <label>Show departments selector on the contact form</label>
+                            <comment>If No is selected, customers won't be able to choose the department when submitting a ticket from the contact form. In that case, ticket will be sent to primary department (if specified).</comment>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>115</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </show_dep_selector>
+                        <cf_disable_email translate="label">
+                            <label>Disable standard contact form emails</label>
+                            <frontend_type>select</frontend_type>
+                            <comment>If Yes is selected, the standard contact form email won't be sent (use in alliance with "Yes" set in the field above)</comment>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <backend_model>helpdeskultimate/system_config_backend_integrationState</backend_model>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </cf_disable_email>
+                    </fields>
+                </modules>
+
+
+                <imap translate="label">
+
+                    <fields>
+                        <email translate="label">
+                            <label>Email address</label>
+                            <comment>Dedicated help desk email. Do not use this address for anything except this
+                                extension.
+                            </comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </email>
+                        <server translate="label">
+                            <label>Server address</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </server>
+                        <type translate="label">
+                            <label>Type</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>105</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>helpdeskultimate/source_transport</source_model>
+                        </type>
+                        <port translate="label">
+                            <label>Port</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </port>
+                        <login translate="label">
+                            <label>Username</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </login>
+                        <password translate="label">
+                            <label>Password</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>130</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </password>
+                        <ssl translate="label">
+                            <label>Use SSL/TLS</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>140</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>helpdeskultimate/source_SSL</source_model>
+                        </ssl>
+                        <auto_deps translate="label">
+                            <label>Auto assign departments on email reply</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>150</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </auto_deps>
+                    </fields>
+                </imap>
+                <generaldep translate="label">
+
+                    <fields>
+                        <notify translate="label">
+                            <label>Use email notifications</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>45</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </notify>
+                        <name translate="label">
+                            <label>Title</label>
+                            <comment>Name will be used at customer area</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </name>
+                        <contact translate="label">
+                            <label>Email</label>
+                            <comment>Emails to department will be sent to this address</comment>
+                            <frontend_type>text</frontend_type>
+
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </contact>
+                        <sender translate="label">
+                            <label>Sender</label>
+                            <comment>This will be used as "From" address in emails sent to department/customer</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_identity</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sender>
+
+                        <to_admin_new_email translate="label">
+                            <label>New Ticket Admin Template</label>
+                            <comment>This email template will be used to sent notification about new ticket to
+                                department
+                            </comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </to_admin_new_email>
+                        <to_admin_reply_email translate="label">
+                            <label>Ticket Reply Admin Template</label>
+                            <comment>This email template will be used to sent notification about reply in ticket to
+                                department
+                            </comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </to_admin_reply_email>
+                        <to_customer_new_email translate="label">
+                            <label>New Ticket Customer Template</label>
+                            <comment>This email template will be used to sent notification about new ticket to customer
+                            </comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </to_customer_new_email>
+                        <new_from_admin_to_customer translate="label">
+                            <label>New Ticket Customer Template(initiated by admin)</label>
+                            <comment>This email template will be used to sent notification about new ticket to customer
+                                when admin creates ticket
+                            </comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>75</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </new_from_admin_to_customer>
+
+                        <to_customer_reply_email translate="label">
+                            <label>Ticket Reply Customer Template</label>
+                            <comment>This email template will be used to sent notification about reply in ticket to
+                                customer
+                            </comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </to_customer_reply_email>
+
+                        <to_admin_reassign_email translate="label">
+                            <label>Departmnet Reassign Template</label>
+                            <comment>This email template will be used to sent notification about reassigned ticket to new department</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </to_admin_reassign_email>
+                        <to_customer_reassign_email translate="label">
+                            <label>Departmnet Reassign Template to Customer</label>
+                            <comment>This email template will be used to sent notification about reassigned ticket to customer</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>55</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </to_customer_reassign_email> 
+                    </fields>
+                </generaldep>
+                <gridcolumns>
+                    <label>Grid Columns Options</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>110</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <last_customer_reply translate="label">
+                            <label>Last Customer Reply enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </last_customer_reply>
+                        <last_department_reply translate="label">
+                            <label>Last Department Reply enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </last_department_reply>
+                    </fields>
+                </gridcolumns>
+
+
+                <!--storage translate="label">
+                    <fields>
+                        <pq_email translate="label">
+                            <label>Product Questions</label>
+                            <frontend_type>select</frontend_type>
+                            <comment>This overwrites "New ticket from email" option</comment>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <backend_model>helpdeskultimate/system_config_backend_integrationState</backend_model>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </pq_email>  
+                        
+                    </fields>                
+                </storage-->
+            </groups>
+        </helpdeskultimate>
+    </sections>
+</config>

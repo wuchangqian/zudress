@@ -1,0 +1,43 @@
+<?php if (($_products = $this->getProductCollection()) && $_collectionSize = $_products->getSize()): ?>
+<div class="home-box">
+    <div class="head">
+		<span><?php echo $this->__($this->getTitle()) ?></span>
+		<a class="see_more" href="#" ><?php echo $this->__('see more') ?></a>
+    </div>
+    <div class="content  catalog-listing <?php echo $this->getClassName() ?>">
+    <ul class="home-list">
+    <?php foreach ($_products->getItems() as $_product): ?>
+
+        <li class="item">
+			<div class="home-product-img"><a width="155" height="120" href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_product->getName()) ?>)">
+				<img class="lazy" data-original="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(155,120) ?>"  src="<?php echo $this->getSkinUrl('images/loader.gif'); ?>" alt="<?php echo $this->htmlEscape($_product->getName()) ?>" /></a>
+			</div>
+		 <div class="product-other-info">
+		      <h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_product->getName()) ?>)"><?php echo $this->htmlEscape($_product->getName()) ?></a></h2>
+		     <?php echo $this->getPriceHtml($_product, true, $this->getPriceSuffix()) ?>
+		     <div class="clear"></div>
+   	             <?php echo $this->getReviewsSummaryHtml($_product, 'short', true) ?>
+	    
+		     <?php $categories = $_product->getCategoryIds(); ?>
+		     <span>In </span>
+	         <?php $i=1; foreach($categories as $k => $_category_id): ?>
+		        <?php if($i>1) {break;} ?>
+				<?php $_category = Mage::getModel('catalog/category')->load($_category_id) ?> 
+		        <a  class="in-category" href="<?php echo $_category->getUrl() ?>"><?php echo $_category->getName() ?></a>
+		     <?php $i++; endforeach; ?>
+
+		</div>
+
+             
+
+           </li>
+
+    <?php endforeach; ?>
+    </ul>
+    </div>
+    <script type="text/javascript">decorateGeneric($$('.grid-row'), ['first', 'last', 'odd', 'even']);</script>
+	<script type="text/javascript">
+		jQuery("img.lazy").show().lazyload();
+	</script>
+</div>
+<?php endif; ?>

@@ -1,0 +1,39 @@
+<?php if (($_products = $this->getProductCollection()) && $_collectionSize = $_products->getSize()): ?>
+<div class="home-box">
+    <div class="head"><span><?php echo $this->__($this->getTitle()) ?></span></div>
+    <div class="content  catalog-listing <?php echo $this->getClassName() ?>">
+	<?php echo $this->getToolbarHtml() ?>
+    <ul class="home-list">
+    <?php foreach ($_products->getItems() as $_product): ?>
+
+        <li class="item">
+			<div class="home-product-img"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_product->getName()) ?>)">
+				<img class="product-image" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(155,120) ?>" width="155" height="120" alt="<?php echo $this->htmlEscape($_product->getName()) ?>" /></a>
+			</div>
+		 <div class="product-other-info">
+		      <h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_product->getName()) ?>)"><?php echo $this->htmlEscape($_product->getName()) ?></a></h2>
+		     <?php echo $this->getPriceHtml($_product, true, $this->getPriceSuffix()) ?>
+		     <div class="clear"></div>
+   	             <?php echo $this->getReviewsSummaryHtml($_product, 'short', true) ?>
+
+		    
+		     <?php $categories = $_product->getCategoryIds(); ?>
+		     <span>In </span>
+	             <?php $i=1; foreach($categories as $k => $_category_id): ?>
+		        <?php if($i>1) {break;} ?>
+			<?php $_category = Mage::getModel('catalog/category')->load($_category_id) ?> 
+		        <a  class="in-category" href="<?php echo $_category->getUrl() ?>"><?php echo $_category->getName() ?></a>
+		     <?php $i++; endforeach; ?>
+
+		</div>
+
+             
+
+           </li>
+
+    <?php endforeach; ?>
+    </ul>
+    </div>
+    <script type="text/javascript">decorateGeneric($$('.grid-row'), ['first', 'last', 'odd', 'even']);</script>
+</div>
+<?php endif; ?>

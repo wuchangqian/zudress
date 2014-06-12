@@ -1,0 +1,18 @@
+<?php $categories = $this->getCategories(); ?>
+<?php if (count($categories)): ?>
+<div class="block news-categories">
+    <div class="head block-title">
+        <strong><span><?php echo $this->__(Mage::getStoreConfig('clnews/news/title'));?></span></strong>
+    </div>
+    <div class="block-content">
+	    <div class="menu-categories">
+	        <h5><?php echo $this->__('Categories');?></h5>
+	        <ul>
+	            <?php foreach ($categories as $category): ?>
+	                <li><a href="<?php echo $category->getLink(); ?>" ><?php echo $category->getTitle();?></a></li>
+	            <?php endforeach; ?>
+	        </ul>
+	    </div>
+    </div>
+</div>
+<?php endif ?>

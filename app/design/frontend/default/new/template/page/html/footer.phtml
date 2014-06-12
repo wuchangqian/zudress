@@ -1,0 +1,76 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<div class="footer-container">
+    <div class="footer">
+        <div class="footer_top">
+	    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_cms_links')->toHtml() ?>
+	    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('community-block')->toHtml() ?>
+		<div class="clear"></div>
+	</div>
+        <div class="original-footer">
+             <?php echo $this->getChildHtml() ?>
+	</div>
+        <div class="footer_bottom">
+	     <address><?php echo $this->getCopyright() ?></address>
+	</div>
+    </div>
+</div>
+
+<!----- page scroll  --------->
+<!----- page scroll  --------->
+<!----- page scroll  --------->
+<div style="display:none;" class="nav_up" id="nav_up"></div>
+<div style="display:none;" class="nav_down" id="nav_down"></div>
+<script type="text/javascript">
+    jQuery(function() {
+	    var $elem = jQuery('#all-content');
+				
+		jQuery('#nav_up').fadeIn('slow');
+		jQuery('#nav_down').fadeIn('slow');  
+			
+		jQuery(window).bind('scrollstart', function(){
+			jQuery('#nav_up,#nav_down').stop().animate({'opacity':'0.2'});
+		});
+		jQuery(window).bind('scrollstop', function(){
+			jQuery('#nav_up,#nav_down').stop().animate({'opacity':'0.7'});
+		});
+				
+		jQuery('#nav_down').click(
+			function (e) {
+				jQuery('html, body').animate({scrollTop: $elem.height()}, 800);
+			}
+		);
+		jQuery('#nav_up').click(
+			function (e) {
+				jQuery('html, body').animate({scrollTop: '0px'}, 800);
+			}
+		);
+    });
+</script>
+<!----- page scroll  --------->
+<!----- page scroll  --------->
+<!----- page scroll  --------->

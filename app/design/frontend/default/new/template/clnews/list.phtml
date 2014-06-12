@@ -1,0 +1,94 @@
+<h2><?php echo $this->__(Mage::getStoreConfig('clnews/news/title')) ?>
+<?php if (Mage::getStoreConfig('clnews/rss/enable')): ?>
+    <?php if ($this->getCurrentCategory()): ?>
+    <?php $categoryId = $this->getCurrentCategory()->getId() ?>
+    <?php endif ?>
+    <a href="<?php echo Mage::Helper('clnews')->getRssLink(isset($categoryId)?$categoryId:null) ?>">
+        <img src="<?php echo $this->getSkinUrl('css/clnews/images/rss.gif') ?>">
+    </a>
+<?php endif ?>
+</h2>
+<?php $items = $this->getNewsItems() ?>
+<?php foreach ($items as $item): ?>
+<div class="news-item">
+    <? if ($item->getImageShortContentShow() == 1): ?>
+    <?
+        $width_max = Mage::getStoreConfig('clnews/news/shortdescr_image_max_width');
+        $height_max = Mage::getStoreConfig('clnews/news/shortdescr_image_max_height');
+        if (Mage::getStoreConfig('clnews/news/resize_to_max') == 1) {
+            $width = $width_max;
+            $height = $height_max;
+        } else {
+            $imageObj = new Varien_Image(Mage::getBaseDir('media') . DS . $item->getImageShortContent());
+            $original_width = $imageObj->getOriginalWidth();
+            $original_height = $imageObj->getOriginalHeight();
+            if ($original_width > $width_max) {
+                $width = $width_max;
+            } else {
+                $width = $original_width;
+            }
+            if ($original_height > $height_max) {
+                $height = $height_max;
+            } else {
+                $height = $original_height;
+            }
+        }
+        if ($item->getShortWidthResize()): $width = $item->getShortWidthResize(); else: $width; endif;
+        if ($item->getShortHeightResize()): $height = $item->getShortHeightResize(); else: $height; endif;
+    ?>
+        <div class="news_image"><img src="<?php echo Mage::helper('clnews')->resizeImage(str_replace('clnews/', '', $item->getImageShortContent()), $width, $height, 'clnews'); ?>" /></div>
+    <? endif; ?>
+    <h5><a href="<?php echo $item->getUrl($this->getCategory()) ?>" ><?php echo $item->getTitle();?></a></h5>
+    <?php if (Mage::helper('clnews')->showDate()): ?>
+        <?php if (Mage::helper('clnews')->showTime()): ?>
+            <span class="date"><?php echo Mage::helper('core')->formatDate($item->getNewsTime(), true) ?></span>
+        <? else: ?>
+        <? $date = Mage::helper('core')->formatDate($item->getNewsTime(), true); ?>
+        <? $pos = strpos($date, ' '); ?>
+        <? $date = substr($date, 0, $pos);?>
+            <span class="date"><?php echo $date; ?></span>
+        <? endif; ?>
+    <?php endif ?>
+    <?php if ($item->getAuthor()): ?>
+    <span class="date">&nbsp;<?php if (Mage::helper('clnews')->showAuthor()): ?>|&nbsp; <?php echo $item->getAuthor() ?><?php endif;?></span>
+    <?php endif ?>
+    <div class="description">
+        <?php echo $item->getShortContent(); ?>
+
+        <? if(Mage::helper('clnews')->enableLinkRoute()): ?>
+        <? if($link = Mage::helper('clnews')->getLinkRoute()): ?>
+            <a href="<?php echo $item->getUrl($this->getCategory()) ?>" class="more"><?php echo $link . '&raquo;';?></a>
+        <? else: ?>
+            <a href="<?php echo $item->getUrl($this->getCategory()) ?>" class="more"><?php echo $this->__('view more') . '&raquo;';?></a>
+        <? endif; ?>
+    <? endif; ?>
+    </div>
+
+    <div>
+        <?php if($item->getCommentsEnabled()): ?>
+            <a href="<?php echo $this->getItemUrl($item->getId()) ?>#commentBox" class="comment"><?php echo $item->getCommentsCount(); ?> <?php echo $this->__('Comment(s)') ?></a>
+        <?php endif; ?>
+    </div>
+</div>
+<?php endforeach; ?>
+
+
+<?php if($this->getLastPageNum()>1): ?>
+<div class="pager">
+    <p class="page">
+    <?php if (!$this->isFirstPage()): ?>
+        <a href="<?php echo $this->getPreviousPageUrl() ?>"><?php echo $this->__('Previous') ?></a>
+    <?php endif;?>
+    <?php foreach ($this->getPages() as $_page): ?>
+        <?php if ($this->isPageCurrent($_page)): ?>
+            <span><?php echo $_page ?></span>
+        <?php else: ?>
+            <a href="<?php echo $this->getPageUrl($_page) ?>"><?php echo $_page ?></a>
+        <?php endif ?>
+    <?php endforeach; ?>
+    <?php if (!$this->isLastPage()): ?>
+        <a href="<?php echo $this->getNextPageUrl() ?>"><?php echo $this->__('Next') ?></a>
+    <?php endif ?>
+    </p>
+</div>
+<?php endif;?>

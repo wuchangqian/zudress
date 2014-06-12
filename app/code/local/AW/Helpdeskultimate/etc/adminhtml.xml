@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<config>
+
+    <events>
+        <controller_action_predispatch_adminhtml_sales_order_addComment>
+            <observers>
+                <hdu_order_observer>
+                    <type>singleton</type>
+                    <class>helpdeskultimate/observer</class>
+                    <method>createFromOrder</method>
+                </hdu_order_observer>
+            </observers>
+        </controller_action_predispatch_adminhtml_sales_order_addComment>
+        <customer_delete_before>
+            <observers>
+                <hdu_customer_observer>
+                    <type>singleton</type>
+                    <class>helpdeskultimate/observer</class>
+                    <method>unlinkCustomerTickets</method>
+                </hdu_customer_observer>
+            </observers>
+        </customer_delete_before>
+    </events>
+    <menu>
+        <helpdeskultimate module="helpdeskultimate">
+            <depends>
+                <module>AW_Helpdeskultimate</module>
+            </depends>
+            <title>Help Desk</title>
+            <sort_order>71</sort_order>
+
+            <children>
+                <index translate="title" module="helpdeskultimate">
+                    <title>View tickets</title>
+                    <action>helpdeskultimate_admin/index</action>
+                    <sort_order>10</sort_order>
+                </index>
+                <departments translate="title" module="helpdeskultimate">
+                    <title>Manage departments</title>
+                    <action>helpdeskultimate_admin/departments</action>
+                    <sort_order>20</sort_order>
+                </departments>
+                <departments_stats translate="title" module="helpdeskultimate">
+                    <title>Departments statistics</title>
+                    <action>helpdeskultimate_admin/departments/stats</action>
+                    <sort_order>25</sort_order>
+                </departments_stats>
+                <departments_templates translate="title" module="helpdeskultimate">
+                    <title>Quick responses</title>
+                    <action>helpdeskultimate_admin/templates</action>
+                    <sort_order>27</sort_order>
+                </departments_templates>
+                <gateways translate="title" module="helpdeskultimate">
+                    <title>Manage email gateways</title>
+                    <action>helpdeskultimate_admin/gateways</action>
+                    <sort_order>29</sort_order>
+                </gateways>
+                <settings translate="title" module="helpdeskultimate">
+                    <title>Settings</title>
+                    <action>adminhtml/system_config/edit/section/helpdeskultimate</action>
+                    <sort_order>30</sort_order>
+                </settings>
+            </children>
+        </helpdeskultimate>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <helpdeskultimate>
+                        <title>Helpdesk Ultimate Module</title>
+                        <sort_order>10</sort_order>
+                        <children>
+                            <index>
+                                <title>Tickets</title>
+                            </index>
+                            <departments>
+                                <title>Manage departments</title>
+                            </departments>
+                            <departments_stats>
+                                <title>Departments statistics</title>
+                            </departments_stats>
+                            <departments_templates>
+                                <title>Quick responses</title>
+                            </departments_templates>
+                            <gateways>
+                                <title>Manage gateways</title>
+                            </gateways>
+                            <settings>
+                                <title>Settings</title>
+                            </settings>
+                        </children>
+                    </helpdeskultimate>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <helpdeskultimate>
+                                        <title>aheadWorks - Help Desk Section</title>
+                                    </helpdeskultimate>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <layout>
+        <updates>
+            <helpdeskultimate>
+                <file>helpdeskultimate.xml</file>
+            </helpdeskultimate>
+        </updates>
+    </layout>
+    <translate>
+        <modules>
+            <AW_Helpdeskultimate>
+                <files>
+                    <default>AW_Helpdeskultimate.csv</default>
+                </files>
+            </AW_Helpdeskultimate>
+        </modules>
+    </translate>
+    <global_search>
+        <hdu_tickets>
+            <class>helpdeskultimate/search_helpdeskultimate</class>
+        </hdu_tickets>
+    </global_search>
+
+</config>

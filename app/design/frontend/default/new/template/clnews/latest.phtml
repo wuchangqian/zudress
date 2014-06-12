@@ -1,0 +1,44 @@
+<?php $items = $this->getLatestNewsItems() ?>
+<?php if (count($items)): ?>
+<div class="block news-list">
+    <div class="block-title">
+        <strong><span><?php echo $this->__(Mage::getStoreConfig('clnews/news/title'));?></span></strong>
+    </div>
+    <div class="news-content">
+        <div class="menu-categories">
+            <ul class="new-items-ul">
+                <?php foreach ($items as $item): ?>
+                <? if ($item->getData('status') == 1):?>
+                    <li class="new-items-li">
+					     <?php if ($item->getImageFullContentShow() == 1): ?>
+							<div class="news_image">
+								<?php
+									$width = '';
+									$height = '';
+									if ($item->getFullWidthResize()): $width = $item->getFullWidthResize(); else: $width = '77'; endif;
+									if ($item->getFullHeightResize()): $height = $item->getFullHeightResize(); else: $height = '45'; endif;
+								?>
+								<img src="<?php echo Mage::helper('clnews')->resizeImage(str_replace('clnews/', '', $item->getImageFullContent()), $width, $height, 'clnews'); ?>" /></div>
+						<?php endif; ?>
+					    
+                        <a class="news-title" href="<?php echo str_replace('clnews', $this->getAlias(), $item->getUrl()) ?>" ><?php echo $item->getTitle();?></a>
+                        <div class="description">
+							<?php echo $item->getShortContent(); ?>
+
+							<? if(Mage::helper('clnews')->enableLinkRoute()): ?>
+							<? if($link = Mage::helper('clnews')->getLinkRoute()): ?>
+								<a href="<?php echo $item->getUrl($this->getCategory()) ?>" class="more"><?php echo $link . '&raquo;';?></a>
+							<? else: ?>
+								<a href="<?php echo $item->getUrl($this->getCategory()) ?>" class="more"><?php echo $this->__('view more') . '&raquo;';?></a>
+							<? endif; ?>
+						    <? endif; ?>
+						</div>
+                    </li>
+                    <? endif; ?>
+                <?php endforeach; ?>
+              </ul>
+			  <script type="text/javascript">decorateGeneric($$('.new-items-li'), ['last', 'odd', 'even']);</script>
+        </div>
+    </div>
+</div>
+<?php endif ?>

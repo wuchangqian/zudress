@@ -1,0 +1,38 @@
+
+
+<div class="box-recent-review" >
+    <div class="head"><span><?php echo $this->__('New Order') ?></span></div>
+    <div id="neworder_box" class="neworder_box">
+    <ul class="items-content" >
+    <?php 
+$s=1;
+
+//$thisorders =Mage::getModel('sales/order_item')->getCollection()->load()->getItems();
+$thisorders =Mage::getModel('sales/order_item')->getCollection()->setPage(1 , 10)->load()->getItems();
+if ($thisorders) {
+    $thisorders2 = array_reverse($thisorders, TRUE);
+    foreach ($thisorders2 as $i=>$_product) {
+	 $pmodel = Mage::getModel('catalog/product');
+      $_product = $pmodel->load($_product->getProductId());
+	?>
+         <li class="item-list">
+            
+            <span class="reviewimg">
+                <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_product->getName()) ?>">
+                    <img class="product-image" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(45) ?>" width="45" height="45" alt="<?php echo $this->htmlEscape($_product->getName()) ?>" />
+                </a>
+            </span>
+            <span class="reviewname"><a class="product-name" href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_product->getName()) ?>"><?php echo $this->htmlEscape($_product->getName()) ?></a></span>
+            <span class="reviewtitle"><a href="<?php echo $_product->getProductUrl() ?>#customer-reviews" ><?php echo $this->htmlEscape($_product->getTitle()) ?></a></span> 
+	    
+            <span class="reviewauthor"><?php echo $this->__(' %s',$this->helper('core')->currency($_product->getPrice(),true,true))?></span>
+        </li>
+    <?php 
+	
+	}
+	}?>
+    </ul>
+    </div>
+    <script type="text/javascript">decorateGeneric($$('.item-list'), ['last', 'odd', 'even']);</script>
+</div>
+

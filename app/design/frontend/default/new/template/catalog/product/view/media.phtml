@@ -1,0 +1,63 @@
+<?php
+/**
+ * Highslide product-magnifier extension for Magento
+ * Copyright (c) 2009 Silverthemes.com (http://www.magentoshine.com)
+ * Visit www.highslide.com for more information about Highslide
+ */
+?>
+
+<!-- Fetch product-image information -->
+<?php
+    $_product = $this->getProduct();
+    $_helper = $this->helper('catalog/output');
+?>
+
+<!-- Check if Base image is defined, and if so, display it with Highslide effect -->
+<?php if ($_product->getImage() != 'no_selection' && $_product->getImage()): ?>
+
+<div class="highslide-gallery">
+    <a href="<?php echo $this->helper('catalog/image')->init($_product, 'image') ?>" class="highslide" onclick="return hs.expand(this)">
+        <img class="main-img" src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize(350) ?>" alt="<?php echo $this->htmlEscape($this->getImageLabel()) ?>"
+            title="Click to enlarge" />
+    </a>
+	
+	<a href="http://pinterest.com/pin/create/button/?media=<?php echo $this->helper('catalog/image')->init($_product, 'small_image'); ?>&description=<?php echo trim(Mage::registry('current_product')->getName());  ?>&url=<?php echo $_product->getProductUrl(); ?>" class="pin-it-button" count-layout="horizontal"><img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" /></a>
+
+
+
+
+   <!-- Add caption below the image -->
+    <div class="highslide-caption">
+        <?php echo $this->htmlEscape($this->getImageLabel()) ?>
+    </div>
+</div>
+
+<!-- No Base image available. Will show default image from Magento -->
+<?php else: ?>
+    <?php
+        $_img = '<img class="main-img" src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(350).'" alt="'.$this->htmlEscape($_product->getImageLabel()).'" />';
+        echo $_helper->productAttribute($_product, $_img, 'image')
+    ?>
+<?php endif; ?>
+
+<!-- Hey, this product has more images so we'll display the gallery and Highslide them as well -->
+<?php if (count($this->getGalleryImages()) > 0): ?>
+<div class="more-views">
+    <div class="highslide-gallery">
+    <ul>
+    <?php foreach ($this->getGalleryImages() as $_image): ?> 
+        <li>
+            <a href="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile()); ?>" class="highslide" onclick="return hs.expand(this)">
+            <img  src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize(45); ?>" alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>" title="<?php echo $this->htmlEscape($_image->getLabel()) ?>" /></a>       
+        <div class="highslide-caption">
+            <?php echo $this->htmlEscape($_image->getLabel()) ?>
+        </div>           
+       </li>
+    <?php endforeach; ?>  
+    </ul>
+    </div>
+</div>
+
+<?php endif; ?>
+
+<!-- End of media.phtml with Highslide-effect -->

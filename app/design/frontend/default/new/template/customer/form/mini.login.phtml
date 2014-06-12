@@ -1,0 +1,120 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+<?php if($this->helper('customer')->isLoggedIn()): ?>
+	<a class="top-logout-link" rel="nofollow" href="<?php echo Mage::helper('customer')->getLogoutUrl(); ?>"><?php echo $this->__('Logout') ?></a>
+<?php else: ?>
+<div class="block-login"  id="blocklogin">
+
+    <div class="top-links">
+	     <a class="top-login-link" rel="nofollow" href="<?php echo Mage::helper('customer')->getLoginUrl(); ?>"><?php echo $this->__('Sign In') ?></a>
+	     <!--<em>or</em>-->
+	     <a class="top-register-link" rel="nofollow" href="<?php echo Mage::helper('customer')->getRegisterUrl(); ?>"><?php echo $this->__('Join Free') ?></a>
+	</div>
+	<div class="col2-set drop-menu" style="display:none;" >
+	  <div class="col-1 registered-users">
+
+	    <div class="top-login-form ">
+		    <div class="login-title">
+			<span><?php echo $this->__('Login') ?></span>
+		    </div>
+		    <form action="<?php echo $this->getPostActionUrl() ?>" method="post">
+			<div class="login-content">
+			    <label for="mini-login"><?php echo $this->__('Email:') ?></label><input type="text" name="login[username]" id="mini-login" class="input-text" />
+			    <label for="mini-password"><?php echo $this->__('Password:') ?></label><input type="password" name="login[password]" id="mini-password" class="input-text" />
+			    <div class="actions">
+				<button type="submit" class="button mini-login-btn"><span><span><?php echo $this->__('Login') ?></span></span></button>
+			    </div>
+			</div>
+		    </form>
+	     </div>
+	   </div>
+	   <div class="col-2 new-users">
+		  <div class="content">
+			    <h6><?php echo $this->__('New Customers') ?></h6>
+			    <p><?php echo $this->__('By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.') ?></p>
+		 </div>
+		 <div class="buttons-set">
+		      <button type="button" title="<?php echo $this->__('Create an Account') ?>" class="button" onclick="window.location='<?php echo $this->getCreateAccountUrl() ?>';"><span><span><?php echo $this->__('Create an Account') ?></span></span></button>
+		 </div> 
+	   </div>
+      </div>
+ </div>
+
+<!-- ------------------ -->
+<!-- ------------------ -->
+<!-- ------------------ -->
+<style>
+.mgl-10{
+    margin-left:10px;
+}
+
+</style>
+<?php
+    $_layout = $this->getLayout();
+    $btn_twt = $_layout->createBlock('inchoo_socialconnect/twitter_button');
+    $btn_fb  = $_layout->createBlock('inchoo_socialconnect/facebook_button');
+    $btn_gg  = $_layout->createBlock('inchoo_socialconnect/google_button');
+
+    $url_fb = $btn_fb->_getButtonUrl();
+    $url_gg = $btn_gg->_getButtonUrl();
+    $url_tw = $btn_twt->_getButtonUrl();
+
+    if(Mage::getSingleton('cms/page')->getIdentifier() == 'index'
+        && Mage::app()->getFrontController()->getRequest()->getRouteName() == 'cms'){
+    
+        $url_fb = '/customer/account/login/?facebook-relocation';
+        $url_gg = '/customer/account/login/?google-relocation';
+        $url_tw = '/customer/account/login/?twitter-relocation';
+    }
+    
+
+?>
+    <div class="inchoo-socialconnect-facebook mgl-10">
+        <div class="inchoo-socialconnect-facebook-inner">
+            <a href='<?php echo $url_fb;?>'><?php echo $btn_fb->_getButtonText(); ?></a>
+        </div>
+        <div class="inchoo-socialconnect-facebook-right"></div>
+    </div>
+    <div class="inchoo-socialconnect-google mgl-10">
+        <div class="inchoo-socialconnect-google-inner">
+            <a href='<?php echo $url_gg;?>'><?php echo $btn_gg->_getButtonText(); ?></a>
+        </div>
+        <div class="inchoo-socialconnect-google-right"></div>
+    </div>
+    <div class="inchoo-socialconnect-twitter mgl-10">
+        <div class="inchoo-socialconnect-twitter-inner">
+            <a href='<?php echo $url_tw;?>'><?php echo $btn_twt->_getButtonText(); ?></a>
+        </div>
+        <div class="inchoo-socialconnect-twitter-right"></div>
+    </div>
+<!-- ------------------ -->
+<!-- ------------------ -->
+<!-- ------------------ -->
+
+
+ <?php endif; ?>

@@ -1,0 +1,132 @@
+
+.message-box {
+	background:#FFFFFF url(../images/account_box_bg.gif) repeat-x scroll 0 0;
+	border-color:#CCCCCC #999999 #999999 #CCCCCC;
+	border-style:solid;
+	border-width:1px;
+	margin-bottom:10px;
+	padding:15px;
+    overflow-x: auto;
+}
+
+
+.message-box .message-header {
+	background:transparent url(../images/dotted_divider.gif) repeat-x scroll 0 100%;
+	margin-bottom:8px;
+	padding-bottom:2px;
+	text-align:right;
+	height:25px;
+}
+
+
+/* +++ Quoting */
+
+.helpdeskultimate-customer-view .do-quote, .helpdeskultimate-customer-viewext .do-quote{
+	float:right;
+}
+
+.helpdeskultimate-customer-view .message-body FIELDSET,
+.helpdeskultimate-customer-viewext .message-body FIELDSET
+{
+	border:1px solid #999;
+	border-width:0px 0px 0px 1px;
+	padding:5px;
+	margin-left:10px;
+	font-style:italic;
+}
+
+.helpdeskultimate-customer-view .message-body FIELDSET LEGEND,
+.helpdeskultimate-customer-viewext .message-body FIELDSET LEGEND
+{
+	padding:5px;
+	font-weight:bold;
+	display:inline;
+}
+
+/* --- Quoting */
+
+
+/* +++ Attachment */
+.helpdeskultimate-customer-view  .attachment,
+.helpdeskultimate-customer-viewext  .attachment
+{
+	font-weight:bold;
+	margin-bottom:0px;
+	margin-top:1.0em;
+	height:2.0em;
+	padding:0em 0.8em;
+	background:#d8d8d8;
+	line-height:2.0em;
+}
+.helpdeskultimate-customer-view  .attachment A,
+.helpdeskultimate-customer-viewext  .attachment A
+{
+	font-weight:normal;
+}
+/* --- Attachment*/
+
+
+#content_field{
+	/*width:627px;*/
+	width:100%;
+	height:100px;
+}
+
+
+
+.helpdeskultimate-customer-view SPAN.label,
+.helpdeskultimate-customer-viewext SPAN.label
+{
+	font-weight:bold;
+}
+
+
+.helpdeskultimate-customer-view .button-set,
+.helpdeskultimate-customer-viewext .button-set
+{
+	margin-top:0.8em;
+	/**/
+	float:left;
+	margin-bottom:10px;
+	width:100%;
+}
+.helpdeskultimate-customer-view .back,
+.helpdeskultimate-customer-viewext .back
+{
+	height:29px;
+/*	margin-top:-19px;*/
+}
+
+
+.helpdeskultimate-customer-view .group-select table span.label,
+.helpdeskultimate-customer-viewext .group-select table span.label
+{
+	/*width:80px;*/
+	margin-right:5px;
+	display:block;
+	float:left;
+}
+
+.helpdeskultimate-customer-view textarea,
+.helpdeskultimate-customer-viewext textarea{
+    padding: 0px !important;
+}
+
+.helpdeskultimate-customer-view h5,
+.helpdeskultimate-customer-viewext h5{
+    float:left;
+}
+
+.ticket-row TD{
+	cursor:pointer;
+}
+.ticket-row:hover TD{
+	background-color:#ffc !important;
+}
+
+span.required{color:#EB340A}
+.ticket-create-form, .ticket-create-form:hover {text-decoration:none;}
+
+.close-ticket-btn{
+    margin-right:5px;
+}

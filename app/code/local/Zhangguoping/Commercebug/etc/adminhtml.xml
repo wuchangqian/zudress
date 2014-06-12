@@ -1,0 +1,23 @@
+<config>
+
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <commercebug>
+                                            <title>Configuration for Advanced Debugger</title>
+                                        </commercebug>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+
+</config>

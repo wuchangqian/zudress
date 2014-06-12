@@ -1,0 +1,52 @@
+<?php
+ $category = Mage::getModel('catalog/category');
+    if(is_object(Mage::registry('current_category'))){
+        $current_category_path=Mage::registry('current_category')->getPathIds();
+    }else{
+        $current_category_path = array();
+    }
+    $category->load(Mage::app()->getStore()->getRootCategoryId());
+    $children_string = $category->getChildren();
+    $children = explode(',',$children_string);
+    $extra_options='';
+    foreach($children as $c){
+        if ($category->load($c)->getIncludeInMenu()):
+        $selected = (in_array($c, $current_category_path))?'SELECTED':'';
+        $extra_options.= '<option value="' . $c . '" ' . $selected . '>' . $category->load($c)->getName() . '</option>' . "\n";
+		endif; 
+    }
+?>
+<form id="search_mini_form" action="<?php echo $this->helper('catalogsearch')->getResultUrl() ?>" method="get">
+    <div class='RoundedCorner form-search'>
+        <div class='ucq'>
+
+            <b class="rtop"><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b></b>
+            
+            <select name="cat" id="cat" class="input-text">
+                <option value="">  All Categories  </option>
+                <?php echo $extra_options; ?>
+            </select>
+
+            <input id="search" type="text" name="<?php echo $this->helper('catalogsearch')->getQueryParamName() ?>" value="<?php echo $this->helper('catalogsearch')->getEscapedQueryText() ?>"  class="input-text" />
+
+            <button type="submit" title="<?php echo $this->__('Search') ?>" class="button">
+                <span>
+                    <span><?php echo $this->__('Go') ?></span>
+                </span>
+            </button>
+
+            <b class="rbottom"><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></b>
+
+        </div>
+
+        <div id="search_autocomplete" class="search-autocomplete"></div>
+        <script type="text/javascript">
+        //<![CDATA[
+            var searchForm = new Varien.searchForm('search_mini_form', 'search', '<?php echo $this->__('Search Here ...') ?>');
+            searchForm.initAutocomplete('<?php echo $this->helper('searchautocomplete')->getSuggestUrl() ?>', 'search_autocomplete');
+        //]]>
+        </script>
+    </div>
+</form>
+
+<?php echo Mage::helper('searchautocomplete')->getStyle(); ?>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Bestmagento_BmProducts>
+            <version>1.0.0</version>
+        </Bestmagento_BmProducts>
+    </modules>
+    <global>
+        <models>
+            <bmproducts>
+                <class>Bestmagento_BmProducts_Model</class>
+                <resourceModel>bmproducts_resource_eav_mysql4</resourceModel>
+            </bmproducts>
+            <bmproducts_resource_eav_mysql4>
+                <class>Bestmagento_BmProducts_Model_Resource_Eav_Mysql4</class>
+            </bmproducts_resource_eav_mysql4>
+        </models>
+        <blocks>
+            <bmproducts>
+                <class>Bestmagento_BmProducts_Block</class>
+            </bmproducts>
+        </blocks>
+    </global>
+</config>
