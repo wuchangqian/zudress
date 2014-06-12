@@ -6,6 +6,7 @@ php.ini.sample
 pkginfo/
 shell/
 var/
+.settings/
 skin/adminhtml/default/default/
 skin/adminhtml/default/enterprise
 skin/frontend/base/
