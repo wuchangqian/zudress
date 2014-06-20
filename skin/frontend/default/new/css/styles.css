@@ -1748,7 +1748,7 @@ div.add-to-cart #qty{height:21px; width:38px; background:url(../images/sprites.g
 .footer .original-footer ul, .footer .original-footer ul li{display:inline;}
 .footer .footer_bottom .payment_icons{margin:0 auto; padding:10px 0 8px 0; }
 /* footer CMS Links */
-.footer_block{margin:1px; padding:10px; line-height:1.2; font-size:11px;  padding:0 0 15px 10px; margin:10px 0; width:75%; float:left; color:#a11d7a;}
+.footer_block{margin:1px; padding:10px; line-height:1.2; font-size:11px;  padding:0 0 15px 10px; margin:10px 0; width:75%; float:left; color:#a11d7a;border-right:1px solid #ddd;}
 .footer_block .mar_t2{width:24%; float:left; text-align:left;}
 .footer_block .mar_t2 span{font-weight:bold; font-size:13px; }
 .footer_block .mar_t1{margin-top:5px;}
@@ -1768,6 +1768,41 @@ div.add-to-cart #qty{height:21px; width:38px; background:url(../images/sprites.g
 .community-block ul li.i-youtube a{background-position:0 -64px;}
 .community-block ul li.i-flickr a{background-position:0 -96px;}
 .community-block ul li.i-rss a{background-position:0 -128px;}
+
+
+/*Module Social*/
+#social_sign_in {list-style-type:none;float:right;}
+#social_sign_in li {list-style-type:none; float:right; text-align:center; margin-right:7px;}
+#social_sign_in li a {
+    display:block; width:36px; height:35px; 
+    text-indent:-9999px;
+    background:url(../images/social_button.png) no-repeat 0 0px;
+}
+#social_sign_in #top_fb_cont a {background-position: 0px -100px;}
+#social_sign_in #top_fb_cont a:hover {background-position: -0px -135px;}
+#social_sign_in #top_tw_cont a {background-position: -44px -100px;}
+#social_sign_in #top_tw_cont a:hover {background-position: -44px -136px;}
+#social_sign_in #top_gg_cont a {background-position: -132px -100px;}
+#social_sign_in #top_gg_cont a:hover{background-position: -132px -136px;}
+
+
+/**** 修改后的尾部社交元素*/
+.bottom-social {float:right;list-style-type:none; margin:30px 0 0 0;}
+.bottom-social li {list-style-type:none; float:left; background:#fafafa; text-align:center; margin:0 0 0 7px;}
+.bottom-social li a {
+    display:block;
+    width:50px;
+    height:48px; text-indent:-9999px; position: relative; 
+    background:url(../images/social_button.png) #fafafa no-repeat 0 0px; outline: medium none;
+}
+.bottom-social #bottom_soc_fb_cont a {background-position: 0px 0px;}
+.bottom-social #bottom_soc_fb_cont a:hover {background-position: 0px -50px;}
+.bottom-social #bottom_soc_tw_cont a {background-position: -59px 0px;}
+.bottom-social #bottom_soc_tw_cont a:hover {background-position: -59px -50px;}
+.bottom-social #bottom_soc_pi_cont a {background-position: -115px 0px;}
+.bottom-social #bottom_soc_pi_cont a:hover {background-position: -115px -50px;}
+.bottom-social #bottom_soc_go_cont a {background-position: -173px 0px;}
+.bottom-social #bottom_soc_go_cont a:hover{background-position: -173px -50px;}
 
 
 /* Home Product List ======================================================================*/
