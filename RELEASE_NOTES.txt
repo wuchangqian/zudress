@@ -1,4 +1,4 @@
-﻿====  1.12.0.0  ====
+﻿==== wcq 1.12.0.0  ====
 
 === Major Highlights ===
 Optimized Layered Navigation for pricing
