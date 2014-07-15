@@ -6,6 +6,7 @@ php.ini.sample
 pkginfo/
 shell/
 var/
+wcq/local/
 .settings/
 skin/adminhtml/default/default/
 skin/adminhtml/default/enterprise
