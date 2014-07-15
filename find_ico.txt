@@ -9,3 +9,4 @@
 ./skin/frontend/enterprise/iphone/favicon.ico
 ./skin/frontend/enterprise/mobile/favicon.ico
 ./skin/install/default/default/favicon.ico
+ 
