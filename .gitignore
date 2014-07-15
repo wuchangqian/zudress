@@ -1,5 +1,6 @@
 .modgit/
 ######################## wuchangqian@
+.buildpath
 nbproject/
 pear/
 php.ini.sample
