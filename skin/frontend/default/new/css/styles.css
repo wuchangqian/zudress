@@ -500,7 +500,7 @@ tr.summary-details-excluded { font-style:italic; }
 
 /* Header ================================================================================ */
 .logo { float:left; }
-.header-container {}
+.header-container {margin:0 0 10px 0;}
 .header { padding:0; position:relative; }
 .header .logo { float:left; text-decoration:none !important; }
 .header .logo strong { position:absolute; top:-999em; left:-999em; width:0; height:0; font-size:0; line-height:0; text-indent:-999em; overflow:hidden; }
@@ -554,11 +554,11 @@ b.rtop b.r4, b.rbottom b.r4{margin: 0 1px;height: 2px}
 .header-container .top-container { clear:both; text-align:right; }
 .header-right {float:right; border-left:1px solid #d6d6d6; padding-left:19px; margin-left:20px; padding-top:3px; min-height:80px; width:125px;}
 /*.quick-access {float:right; height:46px; width:955px; background:#f9f9f9; border:1px solid #f2f2f2; margin-top:10px;padding:6px;}*/
-.quick-access {float:right; height:46px; width:955px;  margin-top:10px;padding:6px;}
+.quick-access {float:right; height:46px;width:910px; margin-top:10px;padding:6px;}
 .header .home-link{float:left; line-height:30px; background:url(../images/sprites_repeat.gif) no-repeat 8px -741px; text-indent:19px;  }
 .header .home-link a{padding:3px 8px; color:#FF5A00; /*background:url("../images/sprites_repeat.gif") no-repeat right -717px*/ }
 
-.header .quick-access-left{float:left;padding:0 0 0 120px;width:690px;}
+.header .quick-access-left{float:left;padding:0 0 0 30px;width:690px;}
 .header .quick-access-right{float:left; }
 .header .quick-access-right .topcart{padding:10px 0 0 10px; }
 .header .quick-access-right .topcart-content a, .header .quick-access-right p.empty{color:#09318B; text-decoration:underline; font-size:13px;  padding-left:20px; background:url(../images/sprites_repeat.gif) no-repeat 0 -819px;  }
@@ -1525,15 +1525,15 @@ div.add-to-cart #qty{height:21px; width:38px; background:url(../images/sprites.g
 /* Account Login/Create Pages ============================================================ */
 .account-login .content { min-height:230px;   border:1px solid #ddd; border-bottom:0; }
 .account-login .content h2 { padding:0 22px;  margin:0; background:url(../images/sprites_repeat.gif) repeat-x 0 -60px; height:26px; line-height:26px; font-size:13px;font-weight:bold;     }
-.account-login {width:800px; margin:0 auto 20px auto;}
+.account-login {width:100%; margin:0 auto 20px auto;}
 .account-login .new-users {}
 .account-login .registered-users {}
 .account-login .buttons-set { border:1px solid #ddd;  margin:0; padding:8px 13px;  }
 .account-login p{padding:15px 20px 0 20px;}
 .account-login .form-list{padding:10px 20px 0 20px; }
 
-.account-create {width:800px; margin:0 auto;}
-.customer-account-forgotpassword .col-main{width:800px; margin:0 auto;}
+.account-create {width:100%; margin:0 auto;}
+.customer-account-forgotpassword .col-main{width:100%; margin:0 auto;}
 /* Account Login/Create Pages ============================================================ */
 
 /* Remember Me Popup ===================================================================== */
@@ -1848,9 +1848,9 @@ div.add-to-cart #qty{height:21px; width:38px; background:url(../images/sprites.g
 .home-banners li.banner3{padding-right:0;}
 
 /* Home Page Slide Show ===================================================================*/
-.top-banners{width:750px; float:left;}
-#slider { position: relative;height: 265px;width: 750px;z-index: 0;overflow: hidden;margin-bottom:10px;}
-div.scroller {height:265px;width: 750px;overflow: hidden;position: relative; z-index:0;}
+.top-banners{width:970px; float:left;}
+#slider { position: relative;height: 265px;width: 970px;z-index: 0;overflow: hidden;margin-bottom:10px;}
+div.scroller {height:265px;width: 970px;overflow: hidden;position: relative; z-index:0;}
 div.slidercontrolwr {position:absolute;right:8px;bottom:8px;z-index:1;}
 div.scroller img{border: none;}
 div.scroller div.sectionslide {height:265px;overflow:hidden;float:left;}
