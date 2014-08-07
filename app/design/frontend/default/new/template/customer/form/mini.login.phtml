@@ -21,16 +21,27 @@
     }
 ?>
     <ul id="social_sign_in">
-      <li id="top_fb_cont"><a href='<?php echo $url_fb;?>'><?php echo $btn_fb->_getButtonText(); ?></a></li>
-      <li id="top_tw_cont"><a href='<?php echo $url_tw;?>'><?php echo $btn_twt->_getButtonText(); ?></a></li>
-      <li id="top_gg_cont"><a href='<?php echo $url_gg;?>'><?php echo $btn_gg->_getButtonText(); ?></a></li>
+      <li id="top_fb_cont"><a title="Login with your facebook account" href='<?php echo $url_fb;?>'><?php echo $btn_fb->_getButtonText(); ?></a></li>
+      <li id="top_tw_cont"><a title="Login with your twitter account" href='<?php echo $url_tw;?>'><?php echo $btn_twt->_getButtonText(); ?></a></li>
+      <li id="top_gg_cont"><a title="Login with your google account" href='<?php echo $url_gg;?>'><?php echo $btn_gg->_getButtonText(); ?></a></li>
+      <li><span style='height:30px;line-height:30px;'>Login With</span></li>
     </ul>
+    <script type="text/javascript">
+   jQuery(document).ready(function(){
+        var $ = jQuery;
+        $('#social_sign_in li a').each(function(o){
+            var a = $(this).attr('title')
+            $(this).attr('title' , a+'wcq')
+
+        })
+    })
+    </script>
 <div class="block-login"  id="blocklogin">
 
     <div class="top-links">
-	     <a class="top-login-link" rel="nofollow" href="<?php echo Mage::helper('customer')->getLoginUrl(); ?>"><?php echo $this->__('Sign In') ?></a>
-	     <!--<em>or</em>-->
-	     <a class="top-register-link" rel="nofollow" href="<?php echo Mage::helper('customer')->getRegisterUrl(); ?>"><?php echo $this->__('Join Free') ?></a>
+	     <a class="top-login-link" rel="nofollow" href="<?php echo Mage::helper('customer')->getLoginUrl(); ?>"><?php echo $this->__('Login') ?></a>
+	     <em>or</em>
+	     <a class="top-register-link" rel="nofollow" href="<?php echo Mage::helper('customer')->getRegisterUrl(); ?>"><?php echo $this->__('Join') ?></a>
 	</div>
 	<div class="col2-set drop-menu" style="display:none;" >
 	  <div class="col-1 registered-users">

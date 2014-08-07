@@ -8,12 +8,13 @@
 .home-box .catalog-listing.bmproducts-popular{height:255px; overflow:hidden;}
 .before_footer .home-box{width:530px; overflow:hidden;}
 .before_footer .home-list li.item{margin-left:10px;}
-.featured-cat-block{width:528px;}
+.featured-cat-block{widows: 790px;}
 .special-box{height:283px;}
 .featured-cat{margin-left:10px;width:166px}
-.quick-access{width:735px;}
+.quick-access{width:680px;}
 .header .quick-access-left{width:530px;}
-.header .form-search input{width:261px;}
+.header .form-search input{width:320px;}
+.nav-container {width:980px;}
 .search_term{width:500px;}
 #topnav{width:750px; overflow:hidden;}
 .product-view .product-img-box{width:302px;}
