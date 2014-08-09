@@ -1739,7 +1739,7 @@ div.add-to-cart #qty{height:21px; width:38px; background:url(../images/sprites.g
 .footer p { text-align:right; }
 .footer address { text-align:center; margin-bottom:5px; }
 .footer ul li {}
-.footer ul li a { display:inline-block; position:relative; overflow:hidden;color:#666;margin-right: 14px;}
+.footer ul li a { display:inline-block; position:relative; overflow:hidden;color:#666;margin-right: 12px;}
 .footer ul li a span {display:block; height:1px; bottom:0; width:0; position:absolute; left:50%; background:#5e8b03;}
 .footer .footer_top{border-bottom:none; margin-bottom:10px;}
 .footer-container .bottom-container { text-align:center; }
@@ -1748,7 +1748,7 @@ div.add-to-cart #qty{height:21px; width:38px; background:url(../images/sprites.g
 .footer .original-footer ul, .footer .original-footer ul li{display:inline;}
 .footer .footer_bottom .payment_icons{margin:0 auto; padding:10px 0 8px 0; }
 /* footer CMS Links */
-.footer_block{margin:1px; padding:10px; line-height:1.2; font-size:11px;  padding:0 0 15px 10px; margin:10px 0; width:75%; float:left; color:#666;border-right:1px solid #ddd;}
+.footer_block{line-height:1.2; font-size:11px;  padding:0 0 15px 10px; margin:10px 0; width:70%; float:left; color:#666;border-right:1px solid #ddd;}
 .footer_block .mar_t2{width:24%; float:left; text-align:left;}
 .footer_block .mar_t2 span{font-weight:bold; font-size:13px; }
 .footer_block .mar_t1{margin-top:5px;}
@@ -1787,8 +1787,8 @@ div.add-to-cart #qty{height:21px; width:38px; background:url(../images/sprites.g
 
 
 /**** 修改后的尾部社交元素*/
-.bottom-social {float:right;list-style-type:none; margin:30px 0 0 0;}
-.bottom-social li {list-style-type:none; float:left; background:#fafafa; text-align:center; margin:0 0 0 7px;}
+.bottom-social {float:left;list-style-type:none; margin:30px 0 0 0;}
+.bottom-social li {list-style-type:none; float:left; background:#fafafa; text-align:center; margin:0 0 0 4px;}
 .bottom-social li a {
     display:block;
     width:50px;
