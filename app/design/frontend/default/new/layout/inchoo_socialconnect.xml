@@ -35,33 +35,7 @@
 -->
 
 <layout>
-    <default>
-        <reference name="head">
-            <action method="addItem"
-                ifconfig="customer/inchoo_socialconnect_google/enabled">
-                <type>skin_css</type>
-                <name>inchoo_socialconnect/google/css/button.css</name>
-            </action>
-            <action method="addItem"
-                ifconfig="customer/inchoo_socialconnect_facebook/enabled">
-                <type>skin_css</type>
-                <name>inchoo_socialconnect/facebook/css/button.css</name>
-            </action>
-            <action method="addItem"
-                ifconfig="customer/inchoo_socialconnect_twitter/enabled">
-                <type>skin_css</type>
-                <name>inchoo_socialconnect/twitter/css/button.css</name>
-            </action>
-        </reference>
-    </default>
-
     <customer_account_login>
-        <reference name="head">
-            <action method="addItem">
-                <type>skin_css</type>
-                <name>inchoo_socialconnect/css/styles.css</name>
-            </action>
-        </reference>
         <reference name="content">
             <block type="inchoo_socialconnect/login" name="inchoo_socialconnect_login">
                 <block type="inchoo_socialconnect/google_button" name="inchoo_socialconnect_google_login_button" />
@@ -71,13 +45,7 @@
         </reference>
     </customer_account_login>
     
-    <customer_account_create>        
-        <reference name="head">
-            <action method="addItem">
-                <type>skin_css</type>
-                <name>inchoo_socialconnect/css/styles.css</name>
-            </action>
-        </reference>
+    <customer_account_create>
         <reference name="customer_form_register">
             <action method="setTemplate" >
                 <template>inchoo/socialconnect/customer/form/register.phtml</template>
@@ -120,10 +88,6 @@
             <action method="setTitle" translate="title" module="inchoo_socialconnect">
                 <title>Google Connect</title>
             </action>
-            <action method="addItem">
-                <type>skin_css</type>
-                <name>inchoo_socialconnect/css/styles.css</name>
-            </action>
         </reference>
         <reference name="my.account.wrapper">
             <block type="inchoo_socialconnect/google_account" name="inchoo_socialconnect_google_account">
@@ -143,10 +107,6 @@
         <reference name="head">
             <action method="setTitle" translate="title" module="inchoo_socialconnect">
                 <title>Facebook Connect</title>
-            </action>
-            <action method="addItem">
-                <type>skin_css</type>
-                <name>inchoo_socialconnect/css/styles.css</name>
             </action>
         </reference>
         <reference name="my.account.wrapper">
@@ -168,10 +128,6 @@
             <action method="setTitle" translate="title" module="inchoo_socialconnect">
                 <title>Twitter Connect</title>
             </action>
-            <action method="addItem">
-                <type>skin_css</type>
-                <name>inchoo_socialconnect/css/styles.css</name>
-            </action>
         </reference>
         <reference name="my.account.wrapper">
             <block type="inchoo_socialconnect/twitter_account" name="inchoo_socialconnect_twitter_account">
@@ -187,10 +143,6 @@
 
     <checkout_onepage_index>
         <reference name="head">
-            <action method="addItem">
-                <type>skin_css</type>
-                <name>inchoo_socialconnect/css/styles.css</name>
-            </action>
         </reference>
         <reference name="checkout.onepage.login">
             <action method="setTemplate" >

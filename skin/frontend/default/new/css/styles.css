@@ -1827,7 +1827,7 @@ div.add-to-cart #qty{height:21px; width:38px; background:url(../images/sprites.g
 .home-box .head span{float:left;}
 
 /* Home Before Footer */
-.before_footer{margin:10px 0;border:1px solid #EAEAEA; }
+.before_footer{margin:10px 0;}
 .before_footer .home_viewed_block .head{background: url("../images/sprites_repeat.gif") repeat-x scroll 0 -60px transparent; height: 26px; line-height: 26px; text-align: left;}
 .before_footer .home_viewed_block .head span{color: #003B7F; display: inline-block; font-size: 13px; font-weight: bold; height: 25px; line-height: 25px; text-indent: 22px; }
 .before_footer .home_viewed_content{height:243px; padding:12px 10px 0 10px; overflow:hidden; }
@@ -2186,3 +2186,29 @@ a#top-language em{padding-left:19px;}
 .add-to-cart .add {background-position: 0 -81px !important;}
 .add-to-cart .reduce, .add-to-cart .add {display: block;float: left;height: 19px;margin-top: 5px;width: 21px;}
 .add-to-cart .reduce {background-position: -34px -81px;}
+
+
+/* inchoo-socialconnect :  google facebook twitter; */
+
+div.inchoo-socialconnect-register,
+div.inchoo-socialconnect-checkout,
+div.inchoo-socialconnect-login {margin-top: 28px;}
+div.inchoo-socialconnect-login .content { min-height: 100px;}
+div.inchoo-socialconnect-register .fieldset {margin: 0px;}
+div.inchoo-socialconnect-account .col3-set .col-1 {width: 29%}
+div.inchoo-socialconnect-account .col3-set .col-2 {width: 49%}
+div.inchoo-socialconnect-account .col3-set .col-3 {width: 19%}
+div.inchoo-socialconnect-account .col2-set .col-1 {width: 79%}
+div.inchoo-socialconnect-account .col2-set .col-2 {width: 19%}
+div.inchoo-socialconnect-twitter{float: right;height: 30px !important;background: transparent url('../images/inchoo-socialconnect/tt/login-button-left.png') no-repeat top left !important;}
+div.inchoo-socialconnect-twitter-inner{height: 30px !important;float: left !important;margin-left: 30px !important;background: transparent url('../images/inchoo-socialconnect/tt/login-button-inner.png') repeat-x top left !important;padding: 0 5px !important;text-shadow: 1px 1px #00a1c4;}
+div.inchoo-socialconnect-twitter-right{float: left !important;height: 30px !important;width: 3px !important;background: transparent url('../images/inchoo-socialconnect/tt/login-button-right.png') no-repeat top left !important;}
+div.inchoo-socialconnect-twitter-inner a{color: #FFFFFF !important;padding: 0 !important;margin: 0 !important;text-decoration: none !important;line-height: 30px !important;}
+div.inchoo-socialconnect-google{float: right;height: 30px !important;background: transparent url('../images/inchoo-socialconnect/gg/login-button-left.png') no-repeat top left !important;}
+div.inchoo-socialconnect-google-inner{height: 30px !important;float: left !important;margin-left: 30px !important;background: transparent url('../images/inchoo-socialconnect/gg/login-button-inner.png') repeat-x top left !important;padding: 0 5px !important;text-shadow: 1px 1px #000000;}
+div.inchoo-socialconnect-google-right{float: left !important;height: 30px !important;width: 3px !important;background: transparent url('../images/inchoo-socialconnect/gg/login-button-right.png') no-repeat top left !important;}
+div.inchoo-socialconnect-google-inner a{color: #FFFFFF !important;padding: 0 !important;margin: 0 !important;text-decoration: none !important;line-height: 30px !important;}     
+div.inchoo-socialconnect-facebook{float: right;height: 30px !important;background: transparent url('../images/inchoo-socialconnect/fb/login-button-left.png') no-repeat top left !important;}
+div.inchoo-socialconnect-facebook-inner{height: 30px !important;float: left !important;margin-left: 30px !important;background: transparent url('../images/inchoo-socialconnect/fb/login-button-inner.png') repeat-x top left !important;padding: 0 5px !important;text-shadow: 1px 1px #1c376d;}
+div.inchoo-socialconnect-facebook-right{float: left !important;height: 30px !important;width: 3px !important;background: transparent url('../images/inchoo-socialconnect/fb/login-button-right.png') no-repeat top left !important;}
+div.inchoo-socialconnect-facebook-inner a{color: #FFFFFF !important;padding: 0 !important;margin: 0 !important;text-decoration: none !important;line-height: 30px !important;}
