@@ -37,7 +37,7 @@
 <layout>
     <customer_account_login>
         <reference name="content">
-            <block type="inchoo_socialconnect/login" name="inchoo_socialconnect_login">
+            <block type="inchoo_socialconnect/login" name="inchoo_socialconnect_login" before='-'>
                 <block type="inchoo_socialconnect/google_button" name="inchoo_socialconnect_google_login_button" />
                 <block type="inchoo_socialconnect/facebook_button" name="inchoo_socialconnect_facebook_login_button" />
                 <block type="inchoo_socialconnect/twitter_button" name="inchoo_socialconnect_twitter_login_button" />

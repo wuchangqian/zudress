@@ -33,16 +33,16 @@
 
 class Inchoo_SocialConnect_Helper_Data extends Mage_Core_Helper_Abstract
 {
-    public function redirect404($frontController)
+    public static function log($message, $level = null, $file = '', $forceLog = false)
     {
-        $frontController->getResponse()
-            ->setHeader('HTTP/1.1','404 Not Found');
-        $frontController->getResponse()
-            ->setHeader('Status','404 File not found');
+        if(Mage::getIsDeveloperMode()) {
+            Mage::log($message, $level, $file, $forceLog);
+        }
+    }
 
-        $pageId = Mage::getStoreConfig('web/default/cms_no_route');
-        if (!Mage::helper('cms/page')->renderPage($frontController, $pageId)) {
-            $frontController->_forward('defaultNoRoute');
-}
+    public function redirect404(){
+
+        Mage::app()->getFrontController()->getResponse()->setRedirect('/customer/account/login/');
+
     }
 }

@@ -36,7 +36,7 @@
         <h1><?php echo $this->__('Twitter Connect') ?></h1>
     </div>
 
-    <?php if($this->_hasUserInfo()): ?>
+    <?php if($this->_hasData()): ?>
 
     <?php
         $twitterId = $this->_getTwitterId();
@@ -77,7 +77,7 @@
     <div class="col2-set">
         <div class="box-content">
             <div class="col-1">
-                <p>111111111111111
+                <p>
                     <?php echo $this->__('You can connect store account with your Twitter account so you could login easier in the future.') ?>
                 </p>
             </div>
