@@ -635,13 +635,42 @@ p A.tab_RUB{background-position:0px -541px;}
 }
 .block-login .col-1{width:39%;}
 .block-login .col-2{width:54%; border-left:1px solid #F4F4F4; padding-left:20px;}
-.block-login .content h6{font-size:12px; font-weight:normal;}
 .block-login .content p{font-size:11px; color:#5B626A;text-align:left;}
 .block-login .login-title span{color:#c20000;}
+.block-login .login-content{height:167px; position:relative;left: 0;top:0;}
 .block-login .login-content label{padding:3px 0; display:block;text-align:left; }
-.block-login .login-content input{width:140px;}
-.block-login .actions{padding-top:15px;vertical-align:bottom;}
+.block-login .login-content input{width:115px;height: 21px;line-height: 21px;}
+.block-login .actions{position:absolute; bottom: 0;right:0;vertical-align:bottom;}
 .block-login button.button.mini-login-btn{ }
+
+.block-login .login-content .lb-username{
+display: block;
+width: 21px;
+height: 21px;
+line-height: 21px;
+color: #FFF;
+background: #ccc url(../images/icon-label2.png) no-repeat 50% 7px;
+position: absolute;
+left: 0;
+top: 40px;
+text-indent: -9999em;
+outline: 0;
+}
+.block-login .login-content .lb-password{
+display: block;
+width: 21px;
+height: 21px;
+line-height: 21px;
+color: #FFF;
+background: #ccc url(../images/icon-label2.png) no-repeat 50% -30px;
+position: absolute;
+left: 0;
+top: 85px;
+text-indent: -9999em;
+outline: 0;
+}
+#mini-login{position:absolute;left: 21px;top: 40px;}
+#mini-password{position:absolute;left: 21px;top: 85px;}
 
 /* Top bar */
 /*.topbar{height:31px; background:url(../images/sprites_repeat.gif) repeat-x 0 -250px #efefef; width:100%; float:left; font-size:11px; }*/

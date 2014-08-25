@@ -37,13 +37,13 @@
 	  <div class="col-1 registered-users">
 
 	    <div class="top-login-form ">
-		    <div class="login-title">
+		    <!--<div class="login-title">
 			<span><?php echo $this->__('Login') ?></span>
-		    </div>
+		    </div>-->
 		    <form action="<?php echo $this->getPostActionUrl() ?>" method="post">
 			<div class="login-content">
-			    <label for="mini-login"><?php echo $this->__('Email:') ?></label><input type="text" name="login[username]" id="mini-login" class="input-text" />
-			    <label for="mini-password"><?php echo $this->__('Password:') ?></label><input type="password" name="login[password]" id="mini-password" class="input-text" />
+			    <label for="mini-login" class="lb-username"><?php #echo $this->__('Email:') ?></label><input type="text" name="login[username]" id="mini-login" class="input-text" />
+			    <label for="mini-password" class="lb-password"><?php #echo $this->__('Password:') ?></label><input type="password" name="login[password]" id="mini-password" class="input-text" />
 			    <div class="actions">
 				<button type="submit" class="button mini-login-btn"><span><span><?php echo $this->__('Login') ?></span></span></button>
 			    </div>
