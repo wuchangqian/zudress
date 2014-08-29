@@ -72,6 +72,8 @@ downloader/
 errors/
 get.php
 includes/
+/*.html
+/*.txt
 index.php.sample
 /install.php
 js/blank.html
