@@ -1,26 +1,94 @@
 <?php
 
-class WP_CustomMenu_Block_Navigation extends Mage_Catalog_Block_Navigation
-{
+class WP_CustomMenu_Block_Navigation extends Mage_Catalog_Block_Navigation{
     const CUSTOM_BLOCK_TEMPLATE = 'wp_custom_menu_%d';
 
-	public function getIsHomePage()
-    {
-        return $this->getUrl('') == $this->getUrl('*/*/*', array('_current'=>true, '_use_rewrite'=>true));
-
-		 // $routeName = Mage::app()->getRequest()->getRouteName();
-		 // $identifier = Mage::getSingleton('cms/page')->getIdentifier();
- 
-		 // if($routeName == 'cms' && $identifier == 'home') {return true;}
+    public function wcq_drawNavBar($category){
+        $ary = array('<ul class="nav-regular opt-fx-fade-inout" id="nav">');
+        $i = 1;
+        foreach($category as $cat){
+            array_push($ary , $this->getTopLevelCategory($cat , $i++));
+        }
+        $ary[] = "</ul>";
+        return implode("", $ary);
     }
 
-    public function showHomeLink()
-    {
+    public function getSC($cat , $index=1 , $level=1){
+
+        //if(!$this->isCategoryActive()){return '';}
+
+        $children = $cat->loadChildren();
+        $children = $cat->getChildren($cat);
+
+        $ary = array();
+
+        foreach($children as $node){
+            $_name = $node->getName();
+            $_url = $this->getCategoryUrl($node);
+            if($node->hasChildren()){
+                $chl = $this->getSc($node , $index++ , $level+1);
+
+                array_push($ary , "<li class='nav-item level${level} nav-${index}-${level} parent'>
+                    <a href='${_url}'><span>${_name}</span></a>
+                    <ul class='level${level} nav-submenu nav-panel'>
+                      ${chl}
+                    </ul>
+                </li>");
+            }else{
+                array_push($ary , "<li class='nav-item level${level} nav-${index}-${level}'><a href='${_url}'><span>${_name}</span></a></li>");
+            }
+        }
+        return implode("", $ary);
+    }
+    public function getTopLevelCategory($cat , $index=0){
+        if (!$cat->getIsActive()) return '';
+        $catid = $cat->getId();
+        $name  = $cat->getName();
+        $url = $this->getCategoryUrl($cat);
+        if($cat->hasChildren()){
+            return "<li class='nav-item level0 nav-$index nav-item--parent mega parent'>
+                <a href='$url'><span>$name</span><span class='caret'>&nbsp;&nbsp;&nbsp;▼</span></a>
+                <div class='nav-panel--dropdown nav-panel full-width'>
+                    <div class='nav-panel-inner'>
+                        <div>
+                            <ul class='level0 nav-submenu nav-submenu--mega dd-itemgrid dd-itemgrid-1col'>
+                                ".$this->getSC($cat , $index++)."
+                            </ul>
+                        </div>
+                        <div class='clear'></div>
+                    </div>
+                    <div class='clear'></div>
+                </div>
+            </li>";
+        }else{
+            return "<li class='nav-item level0 nav-$index nav-item--parent mega'>
+                <a href='$url'>
+                  <span>$name</span>
+                </a>
+                <div class='clear'></div>
+            </li>";
+        }          
+    }
+
+###################################################################################################################
+###################################################################################################################
+###################################################################################################################
+###################################################################################################################
+###################################################################################################################
+
+public $doc =<<<'heredoc'
+
+
+heredoc;
+	public function getIsHomePage(){
+        return $this->getUrl('') == $this->getUrl('*/*/*', array('_current'=>true, '_use_rewrite'=>true));
+    }
+
+    public function showHomeLink(){
         return Mage::getStoreConfig('custom_menu/general/show_home_link');
     }
 
-    public function drawCustomMenuItem($category, $level = 0, $last = false)
-    {
+    public function drawCustomMenuItem($category, $level = 0, $last = false){
         if (!$category->getIsActive()) return '';
 
         $html = array();
